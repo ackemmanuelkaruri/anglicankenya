@@ -16,7 +16,7 @@
         <env name="APP_ENV" value="test"/>
         <env name="DB_HOST" value="127.0.0.1"/>
         <env name="DB_PORT" value="3306"/>
-        <env name="DB_DATABASE" value="anglicankenya"/>
+        <env name="DB_DATABASE" value="anglicankenya_test"/>
         <env name="DB_USERNAME" value="root"/>
         <env name="DB_PASSWORD" value=""/>
     </php>
