@@ -1,0 +1,218 @@
+erDiagram
+    PROVINCES ||--o{ DIOCESES : contains
+    PROVINCES ||--o{ ORGANIZATIONS : "part of"
+    PROVINCES ||--o{ USERS : "belongs to"
+    
+    DIOCESES ||--o{ ARCHDEACONRIES : contains
+    DIOCESES ||--o{ ORGANIZATIONS : "part of"
+    DIOCESES ||--o{ USERS : "belongs to"
+    
+    ARCHDEACONRIES ||--o{ DEANERIES : contains
+    ARCHDEACONRIES ||--o{ ORGANIZATIONS : "part of"
+    ARCHDEACONRIES ||--o{ USERS : "belongs to"
+    
+    DEANERIES ||--o{ PARISHES : contains
+    DEANERIES ||--o{ ORGANIZATIONS : "part of"
+    DEANERIES ||--o{ USERS : "belongs to"
+    
+    PARISHES ||--o{ MINISTRIES : has
+    PARISHES ||--o{ FAMILIES : has
+    PARISHES ||--o{ DEPENDENTS : has
+    PARISHES ||--o{ USERS : "belongs to"
+    
+    ORGANIZATIONS ||--o{ USERS : manages
+    ORGANIZATIONS ||--o{ EVENTS : hosts
+    ORGANIZATIONS ||--o{ AUDIT_LOGS : tracks
+    
+    USERS ||--o{ USER_DETAILS : has
+    USERS ||--o{ DEPENDENTS : "has children"
+    USERS ||--o{ FAMILIES : heads
+    USERS ||--o{ FAMILY_MEMBERS : "member of"
+    USERS ||--o{ SACRAMENT_RECORDS : has
+    USERS ||--o{ ATTENDANCE_RECORDS : tracks
+    USERS ||--o{ GIVING_TRANSACTIONS : makes
+    USERS ||--o{ LEADERSHIP_ROLES : holds
+    USERS ||--o{ MEMBER_GROUPS : "belongs to"
+    USERS ||--o{ USER_ROLES : "assigned to"
+    USERS ||--o{ USER_RELATIONSHIPS : "related to"
+    USERS ||--o{ LOGIN_ATTEMPTS : attempts
+    USERS ||--o{ MINISTRIES : leads
+    USERS ||--o{ MINISTRY_MEMBERS : "member of"
+    
+    MINISTRIES ||--o{ MINISTRY_MEMBERS : has
+    
+    FAMILIES ||--o{ FAMILY_MEMBERS : contains
+    
+    ROLES ||--o{ USER_ROLES : "assigned in"
+    ROLES ||--o{ ROLE_PERMISSIONS : has
+    
+    PERMISSIONS ||--o{ ROLE_PERMISSIONS : "granted to"
+    
+    PROVINCES {
+        int province_id PK
+        string province_name
+        timestamp created_at
+    }
+    
+    DIOCESES {
+        int diocese_id PK
+        int province_id FK
+        string diocese_name
+        string bishop_name
+        string headquarters
+        timestamp created_at
+    }
+    
+    ARCHDEACONRIES {
+        int archdeaconry_id PK
+        int diocese_id FK
+        string archdeaconry_name
+        string archdeacon_name
+        timestamp created_at
+    }
+    
+    DEANERIES {
+        int deanery_id PK
+        int archdeaconry_id FK
+        string deanery_name
+        string dean_name
+        timestamp created_at
+    }
+    
+    PARISHES {
+        int parish_id PK
+        int deanery_id FK
+        string parish_name
+        string parish_priest
+        timestamp created_at
+    }
+    
+    ORGANIZATIONS {
+        int id PK
+        string org_name
+        string org_code UK
+        int province_id FK
+        int diocese_id FK
+        int archdeaconry_id FK
+        int deanery_id FK
+        int parish_id FK
+        string address
+        string city
+        string phone
+        string email
+        json settings
+        timestamp created_at
+    }
+    
+    USERS {
+        int id PK
+        int organization_id FK
+        int province_id FK
+        int diocese_id FK
+        int archdeaconry_id FK
+        int deanery_id FK
+        int parish_id FK
+        enum role_level
+        string username UK
+        string email UK
+        string password
+        string first_name
+        string last_name
+        string phone_number
+        enum gender
+        enum account_status
+        string theme_preference
+        timestamp last_login
+        timestamp created_at
+    }
+    
+    USER_DETAILS {
+        int detail_id PK
+        int user_id FK
+        string occupation
+        string marital_status
+        string education_level
+        string passport
+        string church_membership_no
+        timestamp created_at
+    }
+    
+    DEPENDENTS {
+        int dependent_id PK
+        int parent_user_id FK
+        int parish_id FK
+        string first_name
+        string last_name
+        date date_of_birth
+        enum gender
+        string school_name
+        boolean is_converted_to_user
+        timestamp created_at
+    }
+    
+    FAMILIES {
+        int family_id PK
+        int parish_id FK
+        int head_user_id FK
+        string family_name
+        timestamp created_at
+    }
+    
+    SACRAMENT_RECORDS {
+        int record_id PK
+        int user_id FK
+        enum baptized
+        enum confirmed
+        enum baptism_interest
+        enum confirmation_interest
+        string baptism_certificate
+        string confirmation_certificate
+        timestamp created_at
+    }
+    
+    MINISTRIES {
+        int ministry_id PK
+        int parish_id FK
+        int leader_user_id FK
+        string ministry_name
+        text description
+        timestamp created_at
+    }
+    
+    GIVING_TRANSACTIONS {
+        int giving_id PK
+        int user_id FK
+        decimal amount
+        enum method
+        string reference_no
+        date date_given
+        timestamp created_at
+    }
+    
+    ATTENDANCE_RECORDS {
+        int attendance_id PK
+        int user_id FK
+        date event_date
+        string service_name
+        enum attendance_status
+        timestamp created_at
+    }
+    
+    LOGIN_ATTEMPTS {
+        int attempt_id PK
+        int user_id FK
+        string email_entered
+        string ip_address
+        boolean was_successful
+        timestamp attempt_time
+    }
+    
+    AUDIT_LOG {
+        int audit_id PK
+        string table_name
+        int record_id
+        enum action_type
+        string changed_by
+        text change_details
+        timestamp change_timestamp
+    }
