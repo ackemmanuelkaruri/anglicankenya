@@ -1,0 +1,279 @@
+/* ===== REGISTRATION PAGE STYLES ===== */
+
+/* Body and Background */
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 40px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Register Container - The hovering box */
+.register-container {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header Section */
+.register-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.register-header h2 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.register-header p {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Form Elements */
+.form-label {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    outline: none;
+}
+
+/* Dropdown Fix - Remove double arrows */
+.form-select {
+    background-color: white;
+    /* Remove the problematic appearance settings */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Add custom arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    padding-right: 35px;
+}
+
+.form-select:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Form Sections */
+.form-section {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.form-section h5 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Church Selection */
+.church-selection {
+    margin-bottom: 15px;
+}
+
+.church-selection select {
+    margin-bottom: 10px;
+}
+
+.church-selection label {
+    margin-top: 10px;
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    height: 5px;
+    margin-top: 5px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    background-color: #e9ecef;
+}
+
+.strength-weak {
+    background: #dc3545;
+    width: 33%;
+    height: 5px;
+    border-radius: 3px;
+}
+
+.strength-medium {
+    background: #ffc107;
+    width: 66%;
+    height: 5px;
+    border-radius: 3px;
+}
+
+.strength-strong {
+    background: #28a745;
+    width: 100%;
+    height: 5px;
+    border-radius: 3px;
+}
+
+/* Checkbox */
+.form-check-input:checked {
+    background-color: #667eea;
+    border-color: #667eea;
+}
+
+.form-check-label {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Button Styles */
+.btn-register {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 8px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.btn-register:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.btn-register:active {
+    transform: translateY(0);
+}
+
+/* Alerts */
+.alert {
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.alert-danger {
+    background-color: #fee;
+    color: #c33;
+}
+
+.alert-success {
+    background-color: #efe;
+    color: #3c3;
+}
+
+/* Links */
+.register-container a {
+    color: #667eea;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.register-container a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+/* Text Helpers */
+.text-muted {
+    color: #999 !important;
+    font-size: 12px;
+}
+
+.text-danger {
+    color: #dc3545;
+    font-size: 12px;
+}
+
+/* Small text under inputs */
+small.text-muted {
+    display: block;
+    margin-top: 5px;
+}
+
+/* Password Mismatch Warning */
+#passwordMismatch.d-none {
+    display: none !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    body {
+        padding: 20px 0;
+    }
+    
+    .register-container {
+        max-width: 95%;
+        padding: 30px 20px;
+        margin: 20px auto;
+    }
+    
+    .register-header h2 {
+        font-size: 24px;
+    }
+    
+    .form-section {
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .register-container {
+        padding: 25px 15px;
+    }
+    
+    .form-section h5 {
+        font-size: 15px;
+    }
+    
+    .btn-register {
+        font-size: 15px;
+        padding: 10px;
+    }
+}

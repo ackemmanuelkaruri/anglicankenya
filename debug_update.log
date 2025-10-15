@@ -1,0 +1,378 @@
+Received POST Data:id: 2section_type: personalusername: emmanuelkarurifirst_name: EMMANUELlast_name: karuriemail: ackemmanuelchurchkaruri@gmail.comphone_number: 0713849085gender: Malecountry: Kenyaoccupation: HAWKER/MARKETmarital_status: SINGLEwedding_type: TRADITIONALeducation_level: UNDERGRADUATEuser_id: service_attending: kikuyuenglish_service_team: kikuyu_cell_group: GACHORUEfamily_group: JUDEAbaptized: yesconfirmed: yeschurch_membership_no: employment_id: 0, 0job_title: cleaner, cookcompany: emmanuel, emmanuelemployment_from_date: 2024-10-01, 2023-12-01is_current_employment: 0, 1role_id: serving_from_year: serving_to_year: leadership_type: 
+Received FILES Data:passport: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+baptism_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+confirmation_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+Service Attending (Before DB): kikuyuFamily Group (Before DB): JUDEA
+Database Update Parameters::id: 2:first_name: EMMANUEL:last_name: karuri:email: ackemmanuelchurchkaruri@gmail.com:phone_number: 0713849085:gender: Male:country: Kenya:occupation: HAWKER/MARKET:marital_status: SINGLE:wedding_type: TRADITIONAL:education_level: UNDERGRADUATE:service_attending: kikuyu:family_group: JUDEA:baptized: yes:baptism_certificate: NULL:want_to_be_baptized: NULL:confirmed: yes:confirmation_certificate: NULL:want_to_be_confirmed: NULL:church_membership_no: NULL<p style='color: green;'>Information Updated Successfully!</p>Received POST Data:id: 2section_type: personalusername: emmanuelkarurifirst_name: EMMANUELlast_name: karuriemail: ackemmanuelchurchkaruri@gmail.comphone_number: 0713849085gender: Malecountry: Kenyaoccupation: HAWKER/MARKETmarital_status: SINGLEwedding_type: TRADITIONALeducation_level: UNDERGRADUATEuser_id: service_attending: kikuyuenglish_service_team: kikuyu_cell_group: GACHORUEfamily_group: JUDEAbaptized: yesconfirmed: yeschurch_membership_no: employment_id: 0, 0job_title: cleaner, cookcompany: emmanuel, emmanuelemployment_from_date: 2024-10-01, 2023-12-01is_current_employment: 0, 1role_id: serving_from_year: serving_to_year: leadership_type: 
+Received FILES Data:passport: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+baptism_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+confirmation_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+Service Attending (Before DB): kikuyuFamily Group (Before DB): JUDEA
+Database Update Parameters::id: 2:first_name: EMMANUEL:last_name: karuri:email: ackemmanuelchurchkaruri@gmail.com:phone_number: 0713849085:gender: Male:country: Kenya:occupation: HAWKER/MARKET:marital_status: SINGLE:wedding_type: TRADITIONAL:education_level: UNDERGRADUATE:service_attending: kikuyu:family_group: JUDEA:baptized: yes:baptism_certificate: NULL:want_to_be_baptized: NULL:confirmed: yes:confirmation_certificate: NULL:want_to_be_confirmed: NULL:church_membership_no: NULL<p style='color: orange;'>No changes were made or user not found.</p>Received POST Data:id: 2section_type: personalusername: emmanuelkarurifirst_name: EMMANUELlast_name: karuriemail: ackemmanuelchurchkaruri@gmail.comphone_number: 0713849085gender: Malecountry: Kenyaoccupation: HAWKER/MARKETmarital_status: SINGLEwedding_type: TRADITIONALeducation_level: UNDERGRADUATEuser_id: service_attending: kikuyuenglish_service_team: kikuyu_cell_group: GACHORUEfamily_group: JUDEAbaptized: yesconfirmed: yeschurch_membership_no: employment_id: 0, 0job_title: cleaner, cookcompany: emmanuel, emmanuelemployment_from_date: 2024-10-01, 2023-12-01is_current_employment: 0, 1role_id: serving_from_year: serving_to_year: leadership_type: 
+Received FILES Data:passport: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+baptism_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+confirmation_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+Service Attending (Before DB): kikuyuFamily Group (Before DB): JUDEA
+Database Update Parameters::id: 2:first_name: EMMANUEL:last_name: karuri:email: ackemmanuelchurchkaruri@gmail.com:phone_number: 0713849085:gender: Male:country: Kenya:occupation: HAWKER/MARKET:marital_status: SINGLE:wedding_type: TRADITIONAL:education_level: UNDERGRADUATE:service_attending: kikuyu:family_group: JUDEA:baptized: yes:baptism_certificate: NULL:want_to_be_baptized: NULL:confirmed: yes:confirmation_certificate: NULL:want_to_be_confirmed: NULL:church_membership_no: NULL<p style='color: orange;'>No changes were made or user not found.</p>Received POST Data:id: 2section_type: personalusername: emmanuelkarurifirst_name: EMMANUELlast_name: karuriemail: ackemmanuelchurchkaruri@gmail.comphone_number: 0713849085gender: Malecountry: Kenyaoccupation: HAWKER/MARKETmarital_status: SINGLEwedding_type: TRADITIONALeducation_level: UNDERGRADUATEuser_id: service_attending: kikuyuenglish_service_team: kikuyu_cell_group: GACHORUEfamily_group: JUDEAbaptized: yesconfirmed: yeschurch_membership_no: employment_id: 0, 0job_title: cleaner, cookcompany: emmanuel, emmanuelemployment_from_date: 2024-10-01, 2023-12-01is_current_employment: 0, 1role_id: serving_from_year: serving_to_year: leadership_type: 
+Received FILES Data:passport: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+baptism_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+confirmation_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+Service Attending (Before DB): kikuyuFamily Group (Before DB): JUDEA
+Database Update Parameters::id: 2:first_name: EMMANUEL:last_name: karuri:email: ackemmanuelchurchkaruri@gmail.com:phone_number: 0713849085:gender: Male:country: Kenya:occupation: HAWKER/MARKET:marital_status: SINGLE:wedding_type: TRADITIONAL:education_level: UNDERGRADUATE:service_attending: kikuyu:family_group: JUDEA:baptized: yes:baptism_certificate: NULL:want_to_be_baptized: NULL:confirmed: yes:confirmation_certificate: NULL:want_to_be_confirmed: NULL:church_membership_no: NULL<p style='color: orange;'>No changes were made or user not found.</p>Received POST Data:id: 2section_type: personalusername: emmanuelkarurifirst_name: EMMANUELlast_name: karuriemail: ackemmanuelchurchkaruri@gmail.comphone_number: 0713849085gender: Malecountry: Kenyaoccupation: HAWKER/MARKETmarital_status: SINGLEwedding_type: TRADITIONALeducation_level: UNDERGRADUATEuser_id: service_attending: kikuyuenglish_service_team: kikuyu_cell_group: GACHORUEfamily_group: JUDEAbaptized: yesconfirmed: yeschurch_membership_no: employment_id: 0, 0job_title: cleaner, cookcompany: emmanuel, emmanuelemployment_from_date: 2024-10-01, 2023-12-01is_current_employment: 0, 1role_id: serving_from_year: serving_to_year: leadership_type: 
+Received FILES Data:passport: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+baptism_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+confirmation_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+Service Attending (Before DB): kikuyuFamily Group (Before DB): JUDEA
+Database Update Parameters::id: 2:first_name: EMMANUEL:last_name: karuri:email: ackemmanuelchurchkaruri@gmail.com:phone_number: 0713849085:gender: Male:country: Kenya:occupation: HAWKER/MARKET:marital_status: SINGLE:wedding_type: TRADITIONAL:education_level: UNDERGRADUATE:service_attending: kikuyu:family_group: JUDEA:baptized: yes:baptism_certificate: NULL:want_to_be_baptized: NULL:confirmed: yes:confirmation_certificate: NULL:want_to_be_confirmed: NULL:church_membership_no: NULL<p style='color: orange;'>No changes were made or user not found.</p>Received POST Data:id: 2section_type: personalusername: emmanuelkarurifirst_name: EMMANUELlast_name: karuriemail: ackemmanuelchurchkaruri@gmail.comphone_number: 0713849085gender: Malecountry: Kenyaoccupation: HAWKER/MARKETmarital_status: SINGLEwedding_type: TRADITIONALeducation_level: UNDERGRADUATEuser_id: service_attending: kikuyuenglish_service_team: kikuyu_cell_group: GACHORUEfamily_group: JUDEAbaptized: yesconfirmed: yeschurch_membership_no: employment_id: 0, 0job_title: cleaner, cookcompany: emmanuel, emmanuelemployment_from_date: 2024-10-01, 2023-12-01is_current_employment: 0, 1role_id: serving_from_year: serving_to_year: leadership_type: 
+Received FILES Data:passport: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+baptism_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+confirmation_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+Service Attending (Before DB): kikuyuFamily Group (Before DB): JUDEA
+Database Update Parameters::id: 2:first_name: EMMANUEL:last_name: karuri:email: ackemmanuelchurchkaruri@gmail.com:phone_number: 0713849085:gender: Male:country: Kenya:occupation: HAWKER/MARKET:marital_status: SINGLE:wedding_type: TRADITIONAL:education_level: UNDERGRADUATE:service_attending: kikuyu:family_group: JUDEA:baptized: yes:baptism_certificate: NULL:want_to_be_baptized: NULL:confirmed: yes:confirmation_certificate: NULL:want_to_be_confirmed: NULL:church_membership_no: NULL<p style='color: orange;'>No changes were made or user not found.</p>Received POST Data:id: 2section_type: personalusername: emmanuelkarurifirst_name: EMMANUELlast_name: karuriemail: ackemmanuelchurchkaruri@gmail.comphone_number: 0713849085gender: Malecountry: Kenyaoccupation: HAWKER/MARKETmarital_status: SINGLEwedding_type: TRADITIONALeducation_level: UNDERGRADUATEuser_id: service_attending: kikuyuenglish_service_team: kikuyu_cell_group: GACHORUEfamily_group: JUDEAbaptized: yesconfirmed: yeschurch_membership_no: employment_id: 0, 0job_title: cleaner, cookcompany: emmanuel, emmanuelemployment_from_date: 2024-10-01, 2023-12-01is_current_employment: 0, 1role_id: serving_from_year: serving_to_year: leadership_type: 
+Received FILES Data:passport: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+baptism_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+confirmation_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+Service Attending (Before DB): kikuyuFamily Group (Before DB): JUDEA
+Database Update Parameters::id: 2:first_name: EMMANUEL:last_name: karuri:email: ackemmanuelchurchkaruri@gmail.com:phone_number: 0713849085:gender: Male:country: Kenya:occupation: HAWKER/MARKET:marital_status: SINGLE:wedding_type: TRADITIONAL:education_level: UNDERGRADUATE:service_attending: kikuyu:family_group: JUDEA:baptized: yes:baptism_certificate: NULL:want_to_be_baptized: NULL:confirmed: yes:confirmation_certificate: NULL:want_to_be_confirmed: NULL:church_membership_no: NULL<p style='color: orange;'>No changes were made or user not found.</p>Received POST Data:id: 2section_type: personalusername: emmanuelkarurifirst_name: EMMANUELlast_name: karuriemail: ackemmanuelchurchkaruri@gmail.comphone_number: 0713849085gender: Malecountry: Kenyaoccupation: HAWKER/MARKETmarital_status: SINGLEwedding_type: TRADITIONALeducation_level: UNDERGRADUATEuser_id: service_attending: kikuyuenglish_service_team: kikuyu_cell_group: GACHORUEfamily_group: JUDEAbaptized: yesconfirmed: yeschurch_membership_no: employment_id: 0, 0job_title: cleaner, cookcompany: emmanuel, emmanuelemployment_from_date: 2024-10-01, 2023-12-01is_current_employment: 0, 1role_id: serving_from_year: serving_to_year: leadership_type: 
+Received FILES Data:passport: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+baptism_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+confirmation_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+Service Attending (Before DB): kikuyuFamily Group (Before DB): JUDEA
+Database Update Parameters::id: 2:first_name: EMMANUEL:last_name: karuri:email: ackemmanuelchurchkaruri@gmail.com:phone_number: 0713849085:gender: Male:country: Kenya:occupation: HAWKER/MARKET:marital_status: SINGLE:wedding_type: TRADITIONAL:education_level: UNDERGRADUATE:service_attending: kikuyu:family_group: JUDEA:baptized: yes:baptism_certificate: NULL:want_to_be_baptized: NULL:confirmed: yes:confirmation_certificate: NULL:want_to_be_confirmed: NULL:church_membership_no: NULL<p style='color: orange;'>No changes were made or user not found.</p>Received POST Data:id: 2section_type: personalusername: emmanuelkarurifirst_name: EMMANUELlast_name: karuriemail: ackemmanuelchurchkaruri@gmail.comphone_number: 0713849085gender: Malecountry: Kenyaoccupation: HAWKER/MARKETmarital_status: SINGLEwedding_type: TRADITIONALeducation_level: UNDERGRADUATEuser_id: service_attending: kikuyuenglish_service_team: kikuyu_cell_group: GACHORUEfamily_group: JUDEAbaptized: yesconfirmed: yeschurch_membership_no: employment_id: 0, 0job_title: cleaner, cookcompany: emmanuel, emmanuelemployment_from_date: 2024-10-01, 2023-12-01is_current_employment: 0, 1role_id: serving_from_year: serving_to_year: leadership_type: 
+Received FILES Data:passport: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+baptism_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+confirmation_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+Service Attending (Before DB): kikuyuFamily Group (Before DB): JUDEA
+Database Update Parameters::id: 2:first_name: EMMANUEL:last_name: karuri:email: ackemmanuelchurchkaruri@gmail.com:phone_number: 0713849085:gender: Male:country: Kenya:occupation: HAWKER/MARKET:marital_status: SINGLE:wedding_type: TRADITIONAL:education_level: UNDERGRADUATE:service_attending: kikuyu:family_group: JUDEA:baptized: yes:baptism_certificate: NULL:want_to_be_baptized: NULL:confirmed: yes:confirmation_certificate: NULL:want_to_be_confirmed: NULL:church_membership_no: NULL<p style='color: orange;'>No changes were made or user not found.</p>Received POST Data:id: 2section_type: personalusername: emmanuelkarurifirst_name: EMMANUELlast_name: karuriemail: ackemmanuelchurchkaruri@gmail.comphone_number: 0713849085gender: Malecountry: Kenyaoccupation: HAWKER/MARKETmarital_status: SINGLEwedding_type: TRADITIONALeducation_level: UNDERGRADUATEuser_id: service_attending: kikuyuenglish_service_team: kikuyu_cell_group: GACHORUEfamily_group: JUDEAbaptized: yesconfirmed: yeschurch_membership_no: employment_id: 0, 0job_title: cleaner, cookcompany: emmanuel, emmanuelemployment_from_date: 2024-10-01, 2023-12-01is_current_employment: 0, 1role_id: serving_from_year: serving_to_year: leadership_type: 
+Received FILES Data:passport: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+baptism_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+confirmation_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+Service Attending (Before DB): kikuyuFamily Group (Before DB): JUDEA
+Database Update Parameters::id: 2:first_name: EMMANUEL:last_name: karuri:email: ackemmanuelchurchkaruri@gmail.com:phone_number: 0713849085:gender: Male:country: Kenya:occupation: HAWKER/MARKET:marital_status: SINGLE:wedding_type: TRADITIONAL:education_level: UNDERGRADUATE:service_attending: kikuyu:family_group: JUDEA:baptized: yes:baptism_certificate: NULL:want_to_be_baptized: NULL:confirmed: yes:confirmation_certificate: NULL:want_to_be_confirmed: NULL:church_membership_no: NULL<p style='color: orange;'>No changes were made or user not found.</p>Received POST Data:id: 2section_type: personalusername: emmanuelkarurifirst_name: EMMANUELlast_name: karuriemail: ackemmanuelchurchkaruri@gmail.comphone_number: 0713849085gender: Malecountry: Kenyaoccupation: HAWKER/MARKETmarital_status: SINGLEwedding_type: TRADITIONALeducation_level: UNDERGRADUATEuser_id: service_attending: kikuyuenglish_service_team: kikuyu_cell_group: GACHORUEfamily_group: JUDEAbaptized: yesconfirmed: yeschurch_membership_no: employment_id: 0, 0job_title: cleaner, cookcompany: emmanuel, emmanuelemployment_from_date: 2024-10-01, 2023-12-01is_current_employment: 0, 1role_id: serving_from_year: serving_to_year: leadership_type: 
+Received FILES Data:passport: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+baptism_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+confirmation_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+Service Attending (Before DB): kikuyuFamily Group (Before DB): JUDEA
+Database Update Parameters::id: 2:first_name: EMMANUEL:last_name: karuri:email: ackemmanuelchurchkaruri@gmail.com:phone_number: 0713849085:gender: Male:country: Kenya:occupation: HAWKER/MARKET:marital_status: SINGLE:wedding_type: TRADITIONAL:education_level: UNDERGRADUATE:service_attending: kikuyu:family_group: JUDEA:baptized: yes:baptism_certificate: NULL:want_to_be_baptized: NULL:confirmed: yes:confirmation_certificate: NULL:want_to_be_confirmed: NULL:church_membership_no: NULL<p style='color: orange;'>No changes were made or user not found.</p>Received POST Data:id: 2section_type: personalusername: emmanuelkarurifirst_name: EMMANUELlast_name: karuriemail: ackemmanuelchurchkaruri@gmail.comphone_number: 0713849085gender: Malecountry: Kenyaoccupation: HAWKER/MARKETmarital_status: SINGLEwedding_type: TRADITIONALeducation_level: UNDERGRADUATEuser_id: service_attending: kikuyuenglish_service_team: kikuyu_cell_group: GACHORUEfamily_group: JUDEAbaptized: yesconfirmed: yeschurch_membership_no: employment_id: 0, 0job_title: cleaner, cookcompany: emmanuel, emmanuelemployment_from_date: 2024-10-01, 2023-12-01is_current_employment: 0, 1role_id: serving_from_year: serving_to_year: leadership_type: 
+Received FILES Data:passport: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+baptism_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+confirmation_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+Service Attending (Before DB): kikuyuFamily Group (Before DB): JUDEA
+Database Update Parameters::id: 2:first_name: EMMANUEL:last_name: karuri:email: ackemmanuelchurchkaruri@gmail.com:phone_number: 0713849085:gender: Male:country: Kenya:occupation: HAWKER/MARKET:marital_status: SINGLE:wedding_type: TRADITIONAL:education_level: UNDERGRADUATE:service_attending: kikuyu:family_group: JUDEA:baptized: yes:baptism_certificate: NULL:want_to_be_baptized: NULL:confirmed: yes:confirmation_certificate: NULL:want_to_be_confirmed: NULL:church_membership_no: NULL<p style='color: orange;'>No changes were made or user not found.</p>Received POST Data:id: 2section_type: personalusername: emmanuelkarurifirst_name: EMMANUELlast_name: karuriemail: ackemmanuelchurchkaruri@gmail.comphone_number: 0713849085gender: Malecountry: Kenyaoccupation: HAWKER/MARKETmarital_status: SINGLEwedding_type: TRADITIONALeducation_level: UNDERGRADUATEuser_id: service_attending: kikuyuenglish_service_team: kikuyu_cell_group: GACHORUEfamily_group: JUDEAbaptized: yesconfirmed: yeschurch_membership_no: employment_id: 0, 0job_title: cleaner, cookcompany: emmanuel, emmanuelemployment_from_date: 2024-10-01, 2023-12-01is_current_employment: 0, 1role_id: serving_from_year: serving_to_year: leadership_type: 
+Received FILES Data:passport: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+baptism_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+confirmation_certificate: Array
+(
+    [name] => 
+    [full_path] => 
+    [type] => 
+    [tmp_name] => 
+    [error] => 4
+    [size] => 0
+)
+Service Attending (Before DB): kikuyuFamily Group (Before DB): JUDEA
+Database Update Parameters::id: 2:first_name: EMMANUEL:last_name: karuri:email: ackemmanuelchurchkaruri@gmail.com:phone_number: 0713849085:gender: Male:country: Kenya:occupation: HAWKER/MARKET:marital_status: SINGLE:wedding_type: TRADITIONAL:education_level: UNDERGRADUATE:service_attending: kikuyu:family_group: JUDEA:baptized: yes:baptism_certificate: NULL:want_to_be_baptized: NULL:confirmed: yes:confirmation_certificate: NULL:want_to_be_confirmed: NULL:church_membership_no: NULL<p style='color: orange;'>No changes were made or user not found.</p>

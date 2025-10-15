@@ -1,0 +1,12 @@
+# Prevent directory browsing
+Options -Indexes
+
+# Allow access to image and PDF files
+<FilesMatch "\.(jpg|jpeg|png|gif|pdf)$">
+    Require all granted
+</FilesMatch>
+
+# Deny access to PHP files for security
+<FilesMatch "\.php$">
+    Require all denied
+</FilesMatch>

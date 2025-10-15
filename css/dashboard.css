@@ -1,0 +1,635 @@
+/* ======================================================================
+   DASHBOARD STYLES - Simple and Working
+   ====================================================================== */
+
+/* Header/Navbar positioning with glassmorphism */
+:root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #4caf50;
+            --info-color: #2196f3;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+        }
+        
+        body {
+            background: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            position: fixed;
+            width: 260px;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        
+        .sidebar .user-info {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .sidebar .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 10px;
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255,255,255,0.8);
+            padding: 12px 20px;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-left-color: white;
+        }
+        
+        .sidebar .nav-link i {
+            width: 20px;
+            margin-right: 10px;
+        }
+        
+        .main-content {
+            margin-left: 260px;
+            padding: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .icon-blue { background: #e3f2fd; color: #2196f3; }
+        .icon-green { background: #e8f5e9; color: #4caf50; }
+        .icon-orange { background: #fff3e0; color: #ff9800; }
+        .icon-purple { background: #f3e5f5; color: #9c27b0; }
+        .icon-red { background: #ffebee; color: #f44336; }
+        .icon-teal { background: #e0f2f1; color: #009688; }
+        
+        .page-header {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        
+        .badge-role {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .quick-action-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .quick-action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            color: inherit;
+        }
+        
+        .quick-action-card i {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .scope-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        /* ============================================
+   DASHBOARD ANIMATIONS & EFFECTS
+   ============================================ */
+
+/* ============================================
+   FADE IN/OUT ANIMATIONS
+   ============================================ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOutDown {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Apply animations */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+.fade-out {
+    animation: fadeOut 0.3s ease-out;
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.3s ease-out;
+}
+
+/* ============================================
+   NOTIFICATION STYLES
+   ============================================ */
+
+.notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    max-width: 400px;
+}
+
+.notification {
+    background: white;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: slideInLeft 0.3s ease-out;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
+
+.notification-content i {
+    font-size: 20px;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    padding: 0;
+    margin-left: 12px;
+    transition: color 0.2s;
+}
+
+.notification-close:hover {
+    color: #666;
+}
+
+/* Notification Types */
+.notification-success {
+    border-left: 4px solid #4caf50;
+}
+
+.notification-success .notification-content i {
+    color: #4caf50;
+}
+
+.notification-error {
+    border-left: 4px solid #f44336;
+}
+
+.notification-error .notification-content i {
+    color: #f44336;
+}
+
+.notification-warning {
+    border-left: 4px solid #ff9800;
+}
+
+.notification-warning .notification-content i {
+    color: #ff9800;
+}
+
+.notification-info {
+    border-left: 4px solid #2196f3;
+}
+
+.notification-info .notification-content i {
+    color: #2196f3;
+}
+
+/* Dark theme notifications */
+body[data-theme="dark"] .notification {
+    background: #2a2a2a;
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .notification-close {
+    color: #999;
+}
+
+body[data-theme="dark"] .notification-close:hover {
+    color: #ddd;
+}
+
+/* Ocean theme notifications */
+body[data-theme="ocean"] .notification {
+    background: #e1f5fe;
+    color: #01579b;
+}
+
+/* Forest theme notifications */
+body[data-theme="forest"] .notification {
+    background: #e8f5e9;
+    color: #1b5e20;
+}
+
+/* ============================================
+   TOOLTIP STYLES
+   ============================================ */
+
+.tooltip {
+    position: fixed;
+    background: #333;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    white-space: nowrap;
+    z-index: 9998;
+    pointer-events: none;
+    animation: fadeIn 0.2s ease-in;
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+}
+
+/* Dark theme tooltip */
+body[data-theme="dark"] .tooltip {
+    background: #555;
+}
+
+body[data-theme="dark"] .tooltip::after {
+    border-top-color: #555;
+}
+
+/* ============================================
+   CARD ANIMATIONS
+   ============================================ */
+
+.stat-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-card:hover {
+    animation: bounce 0.6s ease-out;
+}
+
+.quick-action-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.quick-action-card:hover {
+    animation: bounce 0.6s ease-out;
+}
+
+/* Loading state */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+    animation: pulse 1s infinite;
+}
+
+/* ============================================
+   BUTTON ANIMATIONS
+   ============================================ */
+
+button, a.btn, [role="button"] {
+    transition: all 0.3s ease;
+}
+
+button:hover, a.btn:hover, [role="button"]:hover {
+    transform: translateY(-2px);
+}
+
+button:active, a.btn:active, [role="button"]:active {
+    transform: translateY(0);
+}
+
+.theme-btn {
+    transition: all 0.3s ease;
+}
+
+.theme-btn.active {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   SIDEBAR ANIMATIONS
+   ============================================ */
+
+.sidebar {
+    transition: all 0.3s ease;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+}
+
+/* ============================================
+   PAGE TRANSITIONS
+   ============================================ */
+
+.page-header {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.stat-card {
+    animation: fadeInUp 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.stat-card:nth-child(1) { animation-delay: 0s; }
+.stat-card:nth-child(2) { animation-delay: 0.1s; }
+.stat-card:nth-child(3) { animation-delay: 0.2s; }
+.stat-card:nth-child(4) { animation-delay: 0.3s; }
+.stat-card:nth-child(5) { animation-delay: 0.4s; }
+.stat-card:nth-child(6) { animation-delay: 0.5s; }
+
+.quick-action-card {
+    animation: fadeInUp 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.quick-action-card:nth-child(1) { animation-delay: 0.6s; }
+.quick-action-card:nth-child(2) { animation-delay: 0.7s; }
+.quick-action-card:nth-child(3) { animation-delay: 0.8s; }
+.quick-action-card:nth-child(4) { animation-delay: 0.9s; }
+
+/* ============================================
+   MODAL ANIMATIONS
+   ============================================ */
+
+.modal {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-backdrop {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* ============================================
+   SCROLL ANIMATIONS
+   ============================================ */
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ============================================
+   RESPONSIVE ANIMATIONS
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================
+   LOADING SPINNER
+   ============================================ */
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-top: 3px solid #2196f3;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+body[data-theme="dark"] .spinner {
+    border-color: rgba(255, 255, 255, 0.1);
+    border-top-color: #64b5f6;
+}
+
+/* ============================================
+   HIGHLIGHT ANIMATION
+   ============================================ */
+
+@keyframes highlight {
+    0% {
+        background-color: transparent;
+    }
+    50% {
+        background-color: rgba(255, 235, 59, 0.3);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
+
+.highlight {
+    animation: highlight 1s ease-out;
+}
+
+/* ============================================
+   FORM ANIMATIONS
+   ============================================ */
+
+input:focus, textarea:focus, select:focus {
+    transform: scale(1.01);
+    transition: all 0.2s ease;
+}
+
+/* ============================================
+   SUCCESS/ERROR ANIMATIONS
+   ============================================ */
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes checkmark {
+    0% {
+        stroke-dashoffset: 50;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.checkmark {
+    animation: checkmark 0.5s ease-in-out;
+}

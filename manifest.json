@@ -1,0 +1,41 @@
+{
+  "name": "Church Management System",
+  "short_name": "ChurchMS",
+  "description": "Complete church management solution for parishes, dioceses, and provinces",
+  "start_url": "/anglicankenya/login.php",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4A90E2",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/anglicankenya/assets/icons/72x72.png", "sizes": "72x72", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/anglicankenya/assets/icons/96x96.png", "sizes": "96x96", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/anglicankenya/assets/icons/128x128.png", "sizes": "128x128", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/anglicankenya/assets/icons/144x144.png", "sizes": "144x144", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/anglicankenya/assets/icons/152x152.png", "sizes": "152x152", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/anglicankenya/assets/icons/192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/anglicankenya/assets/icons/384x384.png", "sizes": "384x384", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/anglicankenya/assets/icons/512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "Go to dashboard",
+      "url": "/anglicankenya/dashboard.php",
+      "icons": [{ "src": "/anglicankenya/assets/icons/dashboard-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Members",
+      "short_name": "Members",
+      "description": "View members",
+      "url": "/anglicankenya/members.php",
+      "icons": [{ "src": "/anglicankenya/assets/icons/members-icon.png", "sizes": "96x96" }]
+    }
+  ],
+  "categories": ["productivity", "business", "utilities"],
+  "screenshots": [
+    { "src": "/anglicankenya/assets/screenshots/desktop-screenshot.png", "sizes": "1280x720", "type": "image/png", "form_factor": "wide" },
+    { "src": "/anglicankenya/assets/screenshots/mobile-screenshot.png", "sizes": "750x1334", "type": "image/png", "form_factor": "narrow" }
+  ]
+}

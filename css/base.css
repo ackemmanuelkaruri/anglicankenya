@@ -1,0 +1,200 @@
+/* ======================================================================
+   BASE STYLES - Core layout, typography, and general styling
+   ====================================================================== */
+
+/* Body and Background */
+/* Background for both login and dashboard pages */
+body.dashboard-page,
+body.login-page,
+body {
+  background-image: url('../img/anglicankenya.jpg'); /* Adjusted path - goes up one level from css folder */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 8% auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: -1;
+}
+
+/* Container */
+.container {
+    width: 50%;
+    max-width: 600px;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Typography */
+h2 {
+    text-align: center;
+    color: #2c3e50;
+    font-size: 2.2em;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+h3 {
+    color: #34495e;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+}
+
+h4 {
+    color: #34495e;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+hr {
+    margin-top: 1.5rem;
+    border: 0;
+    height: 1px;
+    background-color: #ddd;
+}
+
+/* Labels */
+label {
+    font-weight: 500;
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+}
+
+/* Notes */
+.note {
+    background-color: rgba(255, 248, 220, 0.7);
+    padding: 10px;
+    border-radius: 8px;
+    border-left: 4px solid #f1c40f;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+/* Login Page Specific Styles */
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.login-header p {
+    color: #666;
+    font-size: 14px;
+}
+
+.btn-login {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: transform 0.2s;
+    color: white;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.divider {
+    text-align: center;
+    margin: 25px 0;
+    position: relative;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #ddd;
+}
+
+.divider span {
+    background: white;
+    padding: 0 15px;
+    position: relative;
+    color: #999;
+    font-size: 14px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+        margin: 20px auto;
+    }
+    
+    .login-container {
+        width: 90%;
+        margin: 5% auto;
+    }
+}
+
+/* DROPDOWN VISIBILITY FIX - Corrected for double styling issue */
+select {
+    background-color: white !important;
+    border: 1px solid #ced4da !important;
+    padding: 0.375rem 0.75rem !important;
+    font-size: 1rem !important;
+    color: #495057 !important;
+    display: block !important;
+    width: 100% !important;
+    min-height: 40px !important;
+    position: relative !important;
+    z-index: 10 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    
+    /* Fix double arrow issue */
+    appearance: menulist !important;
+    -webkit-appearance: menulist !important;
+    -moz-appearance: menulist !important;
+    background-image: none !important;
+}
+
+select option {
+    background-color: white !important;
+    color: #495057 !important;
+    display: block !important;
+}

@@ -1,0 +1,722 @@
+.container {
+    width: 90%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+/* Profile Header Styles */
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid white;
+    margin-right: 20px;
+    flex-shrink: 0;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.profile-photo i {
+    font-size: 60px;
+    color: #ddd;
+}
+.profile-info {
+    flex-grow: 1;
+}
+.profile-info h1 {
+    margin: 0 0 10px;
+    font-size: 2rem;
+    font-weight: 600;
+}
+.profile-info p {
+    margin: 5px 0;
+    font-size: 1rem;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+}
+.profile-info p i {
+    margin-right: 8px;
+    width: 18px;
+    text-align: center;
+}
+.profile-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+.btn {
+    display: inline-block;
+    text-align: center;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+.btn:hover {
+    background: linear-gradient(135deg, #2980b9, #2573a7);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.btn-outline-primary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+.btn-outline-primary:hover {
+    background-color: white;
+    color: #2980b9;
+}
+
+/* Profile Section Styles */
+.profile-section {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+.profile-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+.profile-section h2 {
+    color: #2c3e50;
+    font-size: 1.6em;
+    margin: 0 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+    display: flex;
+    align-items: center;
+}
+.profile-section h2 i {
+    margin-right: 8px;
+    color: #3498db;
+}
+.profile-section h3 {
+    color: #34495e;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+/* Grid Layout for Profile Sections */
+.sections-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* Horizontal Layout Styles */
+.horizontal-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.info-card {
+    flex: 1;
+    min-width: 150px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+.info-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.info-card h4 {
+    margin: 0 0 5px;
+    color: #7f8c8d;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.info-card p {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+/* Enhanced Church Information Styles */
+.church-info-enhanced {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.church-info-card {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.church-info-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.church-icon {
+    width: 40px;
+    height: 40px;
+    background: #e1f0fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+.church-icon i {
+    font-size: 1.2rem;
+    color: #3498db;
+}
+.church-details h4 {
+    margin: 0 0 3px;
+    color: #7f8c8d;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.church-details p {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+/* Enhanced Spiritual Status Styles */
+.spiritual-status-enhanced {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.spiritual-status-card {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid #ddd;
+}
+.spiritual-status-card.status-yes {
+    border-left-color: #27ae60;
+    background: linear-gradient(to right, rgba(39, 174, 96, 0.05), #f8f9fa);
+}
+.spiritual-status-card.status-no {
+    border-left-color: #e74c3c;
+    background: linear-gradient(to right, rgba(231, 76, 60, 0.05), #f8f9fa);
+}
+.spiritual-status-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.status-icon {
+    width: 40px;
+    height: 40px;
+    background: #e1f0fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+.status-yes .status-icon {
+    background: #d5f4e6;
+}
+.status-yes .status-icon i {
+    color: #27ae60;
+}
+.status-no .status-icon {
+    background: #fadbd8;
+}
+.status-no .status-icon i {
+    color: #e74c3c;
+}
+.status-icon i {
+    font-size: 1.2rem;
+    color: #3498db;
+}
+.status-content {
+    flex-grow: 1;
+}
+.status-content h4 {
+    margin: 0 0 3px;
+    color: #7f8c8d;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.status-content p {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #2c3e50;
+}
+.status-indicator {
+    margin-left: 8px;
+}
+.status-indicator i {
+    font-size: 1.2rem;
+}
+.status-yes .status-indicator i {
+    color: #27ae60;
+}
+.status-no .status-indicator i {
+    color: #e74c3c;
+}
+
+/* Enhanced Certificates Styles */
+.certificates-enhanced {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+.certificate-container {
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.certificate-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.certificate-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #e1f0fa;
+}
+.certificate-title {
+    display: flex;
+    align-items: center;
+}
+.certificate-title i {
+    font-size: 1rem;
+    color: #3498db;
+    margin-right: 8px;
+}
+.certificate-title h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1rem;
+}
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+.status-available {
+    background: #d5f4e6;
+    color: #27ae60;
+}
+.status-missing {
+    background: #fadbd8;
+    color: #e74c3c;
+}
+.certificate-preview {
+    padding: 15px;
+    text-align: center;
+}
+.certificate-item {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.certificate-item a {
+    display: block;
+    text-decoration: none;
+    color: #3498db;
+    transition: transform 0.3s ease;
+}
+.certificate-item a:hover {
+    transform: scale(1.05);
+}
+.certificate-item img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.file-placeholder {
+    width: 120px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    border-radius: 6px;
+    margin: 0 auto;
+}
+.file-placeholder i {
+    color: #e74c3c;
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+}
+.file-placeholder p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #7f8c8d;
+}
+.certificate-actions {
+    margin-top: 8px;
+}
+.btn-certificate {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    background: #3498db;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.3s ease;
+    font-size: 0.85rem;
+}
+.btn-certificate:hover {
+    background: #2980b9;
+}
+.btn-certificate i {
+    margin-right: 4px;
+}
+.no-certificate {
+    padding: 15px;
+    text-align: center;
+    color: #7f8c8d;
+}
+.no-certificate i {
+    font-size: 2rem;
+    color: #bdc3c7;
+    margin-bottom: 8px;
+}
+.no-certificate p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* Status Card Styles */
+.status-card {
+    flex: 1;
+    min-width: 120px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+.status-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.status-card i {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+    color: #3498db;
+}
+.status-card.yes i {
+    color: #27ae60;
+}
+.status-card.no i {
+    color: #e74c3c;
+}
+.status-card h4 {
+    margin: 0 0 4px;
+    font-size: 0.85rem;
+    color: #7f8c8d;
+}
+.status-card p {
+    margin: 0;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+/* Involvement Card Styles */
+.involvement-card {
+    flex: 1;
+    min-width: 200px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.involvement-card h4 {
+    margin: 0 0 8px;
+    color: #2c3e50;
+    font-size: 1rem;
+}
+
+/* Scrollable Horizontal Layout */
+.scrollable-horizontal {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #3498db #f1f1f1;
+}
+.scrollable-horizontal::-webkit-scrollbar {
+    height: 6px;
+}
+.scrollable-horizontal::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.scrollable-horizontal::-webkit-scrollbar-thumb {
+    background-color: #3498db;
+    border-radius: 10px;
+}
+.scrollable-horizontal::-webkit-scrollbar-thumb:hover {
+    background-color: #2980b9;
+}
+
+/* Employment and Leadership Cards */
+.employment-card, .leadership-card {
+    flex: 0 0 250px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid #3498db;
+}
+.employment-card.current, .leadership-card.current {
+    border-left-color: #27ae60;
+    background-color: #f0fff4;
+}
+.employment-card h4, .leadership-card h4 {
+    margin: 0 0 8px;
+    color: #2c3e50;
+    font-size: 1rem;
+}
+.employment-card .company, .leadership-card .entity {
+    color: #7f8c8d;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+.employment-card .dates, .leadership-card .dates {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+}
+
+/* Certificate Preview Styles */
+.certificate-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+.certificate-item {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    width: 120px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+.certificate-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.certificate-item .certificate-name {
+    padding: 6px;
+    text-align: center;
+    font-size: 0.8rem;
+    background-color: #f8f9fa;
+    color: #2c3e50;
+}
+.certificate-item a {
+    text-decoration: none;
+    color: #3498db;
+    display: block;
+}
+.no-certificate {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    text-align: center;
+    color: #7f8c8d;
+    border: 1px dashed #ddd;
+}
+.no-certificate i {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+    color: #bdc3c7;
+}
+
+/* Tag Styles */
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+}
+.tag {
+    background: #e1f0fa;
+    color: #3498db;
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+/* Two Column Layout */
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .profile-photo {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    .profile-actions {
+        justify-content: center;
+    }
+    
+    /* Sections grid adjustments */
+    .sections-grid {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .horizontal-layout,
+    .scrollable-horizontal {
+        flex-direction: column;
+        overflow-x: visible;
+    }
+    
+    .info-card,
+    .status-card,
+    .involvement-card,
+    .employment-card,
+    .leadership-card {
+        flex: 1;
+        width: 100%;
+    }
+    
+    .profile-info h1 {
+        font-size: 1.6rem;
+    }
+    
+    .profile-info p {
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .church-info-enhanced,
+    .spiritual-status-enhanced,
+    .certificates-enhanced {
+        grid-template-columns: 1fr;
+    }
+    
+    .church-info-card,
+    .spiritual-status-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .church-icon,
+    .status-icon {
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+    
+    .status-indicator {
+        margin-left: 0;
+        margin-top: 8px;
+    }
+    
+    .certificate-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .certificate-title {
+        margin-bottom: 8px;
+    }
+}
+@media (max-width: 576px) {
+    .profile-photo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .profile-info h1 {
+        font-size: 1.4rem;
+    }
+    
+    .profile-section {
+        padding: 12px;
+    }
+    
+    .profile-section h2 {
+        font-size: 1.3rem;
+    }
+}

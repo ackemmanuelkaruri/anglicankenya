@@ -1,0 +1,498 @@
+/* Ministry Section Styles */
+.ministry-section {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+.ministry-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+.ministry-column {
+    flex: 1;
+    min-width: 300px;
+}
+.ministry-column h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-size: 1.1em;
+}
+.selection-limit {
+    margin: 0 0 15px 0;
+    color: #6c757d;
+    font-size: 0.9em;
+    font-style: italic;
+}
+.checkbox-group {
+    margin-bottom: 10px;
+}
+.checkbox-option {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+.checkbox-option input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+.checkbox-option label {
+    cursor: pointer;
+    font-weight: normal;
+}
+.ministry-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+.btn-save-section {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+.btn-save-section:hover {
+    background-color: #0056b3;
+}
+.btn-delete-section {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+.btn-delete-section:hover {
+    background-color: #c82333;
+}
+.btn-delete-section:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+.error-message {
+    color: #dc3545;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+#ministry-status {
+    margin-top: 15px;
+}
+/* Add hover effect for ministry checkboxes to match department */
+.checkbox-option:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+    border-radius: 4px;
+    padding: 5px;
+    margin-left: -5px;
+    padding-left: 5px;
+    transition: all 0.3s ease;
+}
+/* Current assignments display */
+.current-assignments {
+    margin-bottom: 20px;
+}
+.assignment-display h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+.assignments-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.assignment-column {
+    flex: 1;
+    min-width: 250px;
+}
+.assignment-column h5 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #495057;
+    font-size: 1em;
+}
+.assignment-list {
+    min-height: 40px;
+}
+.assignment-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    margin: 0 5px 5px 0;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+.dept-badge {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+}
+.ministry-badge {
+    background-color: #f3e5f5;
+    color: #4a148c;
+}
+.no-assignment {
+    color: #6c757d;
+    font-style: italic;
+}
+/* Responsive design for ministry section */
+@media (max-width: 768px) {
+    .ministry-container {
+        flex-direction: column;
+    }
+    
+    .ministry-column {
+        width: 100%;
+    }
+    
+    .assignments-grid {
+        flex-direction: column;
+    }
+    
+    .assignment-column {
+        width: 100%;
+    }
+    
+    .ministry-actions {
+        flex-direction: column;
+    }
+    
+    .btn-save-section, .btn-delete-section {
+        width: 100%;
+    }
+}
+
+/* Leadership Section Styles */
+.leadership-section {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.leadership-role {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #e9ecef;
+}
+
+.leadership-role h4 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 1.1em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #495057;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.leadership-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-add-role {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.btn-add-role:hover {
+    background-color: #218838;
+}
+
+.btn-save-section {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.btn-save-section:hover {
+    background-color: #0056b3;
+}
+
+.btn-remove-role {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.btn-remove-role:hover {
+    background-color: #c82333;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ced4da;
+    border-radius: 4px;
+    margin-right: 10px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+    background-color: #3498db;
+    border-color: #3498db;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+#leadership-status {
+    margin-top: 15px;
+}
+
+/* Responsive design for leadership section */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .leadership-actions {
+        flex-direction: column;
+    }
+    
+    .btn-add-role, .btn-save-section {
+        width: 100%;
+    }
+}
+
+/* Leadership Summary Styles */
+.leadership-summary {
+    margin-bottom: 30px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #e9ecef;
+}
+
+.leadership-summary h4 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 1.2em;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+.leadership-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.leadership-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+    flex: 1;
+    min-width: 280px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.leadership-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background-color: #f1f5f9;
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h5 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.1em;
+}
+
+.current-badge {
+    background-color: #28a745;
+    color: white;
+    font-size: 0.75em;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.role-detail {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.role-detail:last-child {
+    margin-bottom: 0;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #6c757d;
+    min-width: 80px;
+    margin-right: 10px;
+}
+
+.detail-value {
+    color: #495057;
+    flex: 1;
+}
+
+.edit-toggle {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.btn-edit-leadership {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.btn-edit-leadership:hover {
+    background-color: #0056b3;
+}
+
+.edit-icon {
+    font-size: 1em;
+}
+
+.btn-cancel-edit {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cancel-edit:hover {
+    background-color: #5a6268;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Responsive design for leadership cards */
+@media (max-width: 768px) {
+    .leadership-cards {
+        flex-direction: column;
+    }
+    
+    .leadership-card {
+        width: 100%;
+    }
+    
+    .edit-toggle {
+        text-align: center;
+    }
+}

@@ -1,0 +1,273 @@
+/* ======================================================================
+   BUTTONS - All button styles and variations
+   ====================================================================== */
+
+/* Primary Submit Button */
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    font-size: 1.1em;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-submit:hover {
+    background: linear-gradient(135deg, #2980b9, #2573a7);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-submit:active {
+    transform: translateY(1px);
+}
+
+/* Finish Button */
+.btn-finish {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.btn-finish:hover {
+    background-color: #218838;
+}
+
+/* Cancel Button */
+.btn-cancel {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.btn-cancel:hover {
+    background-color: #5a6268;
+}
+
+/* Add Role Buttons */
+.btn-add-role {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 1rem;
+    display: block;
+}
+
+.btn-add-role:hover {
+    background-color: #45a049;
+}
+
+.btn-add-employment {
+    background-color: #e7f3ff;
+    border: 1px solid #a0c8e7;
+    color: #0073e6;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Remove Role Buttons */
+.btn-remove-role {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 0.9em;
+}
+
+.btn-remove-role:hover {
+    background-color: #d32f2f;
+}
+
+.btn-remove-employment {
+    background-color: #ffeeee;
+    border: 1px solid #e7a0a0;
+    color: #e60000;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Redirect Button */
+.btn-redirect {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-redirect:hover {
+    background-color: #218838;
+}
+
+/* Countdown Buttons */
+.btn-stay {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-stay:hover {
+    background-color: #5a6268;
+}
+
+.btn-go-now {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-go-now:hover {
+    background-color: #0069d9;
+}
+
+/* Form Buttons Container */
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.countdown-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Enhanced Button Styles */
+.btn-remove-employment,
+.btn-remove-employment-role,
+.btn-remove-from-form {
+    background-color: #ffeeee !important;
+    border: 1px solid #e7a0a0 !important;
+    color: #e60000 !important;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer !important;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: inherit;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.btn-remove-employment:hover,
+.btn-remove-employment-role:hover,
+.btn-remove-from-form:hover {
+    background-color: #ffe0e0 !important;
+    border-color: #d99999 !important;
+}
+
+.section-save-btn,
+.btn-save-section {
+    background-color: #28a745 !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer !important;
+    font-weight: bold;
+    margin-right: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.section-save-btn:hover,
+.btn-save-section:hover {
+    background-color: #218838 !important;
+}
+
+#confirmDeleteBtn {
+    background-color: #dc3545 !important;
+    color: white !important;
+    border: 1px solid #dc3545 !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 1060 !important;
+    opacity: 1 !important;
+}
+
+#confirmDeleteBtn:hover:not(:disabled) {
+    background-color: #c82333 !important;
+    border-color: #bd2130 !important;
+}
+
+#confirmDeleteBtn:disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+}
+
+#cancelDeleteBtn {
+    background-color: #6c757d !important;
+    color: white !important;
+    border: 1px solid #6c757d !important;
+    padding: 8px 16px !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 1060 !important;
+    opacity: 1 !important;
+}
+
+#cancelDeleteBtn:hover {
+    background-color: #5a6268 !important;
+    border-color: #545b62 !important;
+}
