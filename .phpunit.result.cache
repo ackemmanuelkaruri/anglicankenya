@@ -1,0 +1,1 @@
+{"version":2,"defects":[],"times":{"AuthTest::testLoginWithValidUser":0.282,"AuthTest::testLoginWithInvalidUser":0.042,"DatabaseTest::testUsersTableExists":0.006,"DatabaseTest::testInsertUser":0.043}}
