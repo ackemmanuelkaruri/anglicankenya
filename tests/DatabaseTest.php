@@ -8,10 +8,10 @@ class DatabaseTest extends TestCase
     protected function setUp(): void
     {
         try {
-            $host = getenv('DB_HOST') ?: 'localhost';
-            $dbname = getenv('DB_DATABASE') ?: 'anglicankenya';
-            $username = getenv('DB_USERNAME') ?: 'root';
-            $password = getenv('DB_PASSWORD') ?: '';
+            $host = $_ENV['DB_HOST'] ?? getenv('DB_HOST') ?: 'localhost';
+            $dbname = $_ENV['DB_DATABASE'] ?? getenv('DB_DATABASE') ?: 'anglicankenya_test';
+            $username = $_ENV['DB_USERNAME'] ?? getenv('DB_USERNAME') ?: 'root';
+            $password = $_ENV['DB_PASSWORD'] ?? getenv('DB_PASSWORD') ?: '';
             
             $this->pdo = new PDO(
                 "mysql:host=$host;dbname=$dbname", 
