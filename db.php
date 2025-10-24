@@ -5,6 +5,8 @@
  * Now uses environment-based configuration
  * ============================================
  */
+
+// ✅ Define DB_INCLUDED constant to allow security.php to load
 // Load environment configuration
 require_once __DIR__ . '/config.php';
 
@@ -34,7 +36,9 @@ try {
     }
 }
 
-// Legacy function for backward compatibility
+/**
+ * Legacy function for backward compatibility
+ */
 function is_admin($username = null) {
     global $pdo;
     
@@ -51,3 +55,5 @@ function is_admin($username = null) {
     
     return isset($_SESSION['role_level']) && in_array($_SESSION['role_level'], ['super_admin', 'diocese_admin', 'archdeaconry_admin']);
 }
+
+// ✅ NO CLOSING TAG - Prevents whitespace/BOM issues

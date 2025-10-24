@@ -1,9 +1,58 @@
+
 /**
  * ============================================
- * DASHBOARD MANAGER - Complete Dashboard Control
- * Handles: Themes, Notifications, Animations, UI Effects
+ * GLOBAL THEME SWITCHER FUNCTION
+ * Exposed globally for inline HTML 'onclick' events.
  * ============================================
  */
+function switchTheme(newTheme) {
+    const body = document.body;
+
+    // Check if theme is already set
+    if (newTheme === body.getAttribute('data-theme')) {
+        return;
+    }
+
+    // 1. Client-side update
+    body.setAttribute('data-theme', newTheme);
+
+    // 2. Server-side update (Save preference)
+    // We send this POST request to the current page (index.php or dashboard.php)
+    // where the PHP logic handles saving the theme to the database/session.
+    fetch(window.location.href, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'theme=' + newTheme
+    });
+
+    // 3. Update active button styles
+    updateActiveSwitch(newTheme);
+}
+
+/**
+ * Helper function to visually mark the active switch button.
+ */
+function updateActiveSwitch(activeTheme) {
+    // Find all theme buttons and update their 'active' class
+    document.querySelectorAll('.theme-btn').forEach(switchElement => {
+        if (switchElement.getAttribute('data-theme') === activeTheme) {
+            switchElement.classList.add('active');
+        } else {
+            switchElement.classList.remove('active');
+        }
+    });
+}
+
+// Ensure the theme button state is set correctly on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const initialTheme = document.body.getAttribute('data-theme');
+    updateActiveSwitch(initialTheme);
+});
+
+// The rest of your DashboardManager class code can remain as is...
+// ...
 
 class DashboardManager {
     constructor() {

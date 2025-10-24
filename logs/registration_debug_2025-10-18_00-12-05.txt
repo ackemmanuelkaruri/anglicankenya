@@ -1,0 +1,31 @@
+[2025-10-18 00:12:05] === REGISTRATION ATTEMPT STARTED ===
+[2025-10-18 00:12:05] Diocese selected: Diocese of Mount Kenya South
+[2025-10-18 00:12:05] Archdeaconry selected: Thimbigua Archdeaconry
+[2025-10-18 00:12:05] Deanery selected: Karuri Deanery
+[2025-10-18 00:12:05] Parish selected: Ack St. Michael and All Angels Kentemere Parish
+[2025-10-18 00:12:05] User details: emmanuel karara (bernardkimani500@gmail.com)
+[2025-10-18 00:12:05] Database transaction started
+[2025-10-18 00:12:05] Diocese data loaded: SUCCESS
+[2025-10-18 00:12:05] Archdeaconry found: Thimbigua Archdeaconry
+[2025-10-18 00:12:05] Deanery found: Karuri Deanery
+[2025-10-18 00:12:05] Parish found: Ack St. Michael and All Angels Kentemere Parish
+[2025-10-18 00:12:05] Validation results - Arch: 1, Dean: 1, Parish: 1
+[2025-10-18 00:12:05] Checking for existing diocese: Diocese of Mount Kenya South
+[2025-10-18 00:12:05] Found existing diocese with ID: 3
+[2025-10-18 00:12:05] Checking for existing archdeaconry: Thimbigua Archdeaconry
+[2025-10-18 00:12:05] Archdeaconry not found, creating new...
+[2025-10-18 00:12:05] Created archdeaconry with ID: 5
+[2025-10-18 00:12:05] Checking for existing deanery: Karuri Deanery
+[2025-10-18 00:12:05] Deanery not found, creating new...
+[2025-10-18 00:12:05] Created deanery with ID: 5
+[2025-10-18 00:12:05] Checking for existing parish: Ack St. Michael and All Angels Kentemere Parish
+[2025-10-18 00:12:05] Parish not found, creating new...
+[2025-10-18 00:12:05] Created parish with ID: 9
+[2025-10-18 00:12:05] Final IDs - Diocese: 3, Arch: 5, Dean: 5, Parish: 9
+[2025-10-18 00:12:05] Checking for existing organization...
+[2025-10-18 00:12:05] Organization not found, creating new...
+[2025-10-18 00:12:05] Generated org_code: DIOTHIKARACK
+[2025-10-18 00:12:05] Transaction rolled back due to PDO error
+[2025-10-18 00:12:05] PDO ERROR: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'DIOTHIKARACK' for key 'organizations.org_code'
+[2025-10-18 00:12:05] Stack trace: #0 C:\wamp64\www\anglicankenya\register.php(425): PDOStatement->execute(Array)
+#1 {main}

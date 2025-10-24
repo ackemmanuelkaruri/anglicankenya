@@ -1,17 +1,16 @@
 /**
  * ============================================
  * SERVICE WORKER - PWA Offline Support
- * Optimized version with safe caching
+ * Fixed version - excludes dynamic pages from cache
  * ============================================
  */
-
-const CACHE_NAME = 'churchms-cache-v1';
+const CACHE_NAME = 'churchms-cache-v4'; // ⚠️ CHANGED VERSION TO FORCE UPDATE
 const OFFLINE_URL = '/anglicankenya/offline.html';
 
-// Files to cache for offline (all local + CDN)
+// Files to cache for offline (REMOVED login.php and dashboard.php)
 const FILES_TO_CACHE = [
-  '/anglicankenya/login.php',
-  '/anglicankenya/dashboard.php',
+  // ❌ REMOVED: '/anglicankenya/login.php' - Never cache login pages!
+  // ❌ REMOVED: '/anglicankenya/dashboard.php' - Dynamic content
   '/anglicankenya/css/login.css',
   '/anglicankenya/css/dashboard.css',
   '/anglicankenya/js/pwa-setup.js',
@@ -32,7 +31,7 @@ const FILES_TO_CACHE = [
  * INSTALL - cache app shell
  */
 self.addEventListener('install', event => {
-  console.log('[Service Worker] Installing...');
+  console.log('[Service Worker] Installing v4...');
   event.waitUntil(
     caches.open(CACHE_NAME).then(async cache => {
       console.log('[Service Worker] Caching app shell...');
@@ -58,33 +57,89 @@ self.addEventListener('install', event => {
  * ACTIVATE - remove old caches
  */
 self.addEventListener('activate', event => {
-  console.log('[Service Worker] Activating...');
+ console.log('[Service Worker] Activating v4...');
   event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
+    caches.keys().then(keys => {
+      return Promise.all(
         keys.filter(key => key !== CACHE_NAME)
-            .map(key => caches.delete(key))
-      )
-    )
+            .map(key => {
+              console.log('[Service Worker] Deleting old cache:', key);
+              return caches.delete(key);
+            })
+      );
+    })
   );
   self.clients.claim();
 });
 
 /**
- * FETCH - network first for navigation, cache fallback
+ * FETCH - Smart caching strategy
+ * Network-first for dynamic pages, cache-first for static assets
  */
 self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+  
+ const neverCache = [
+    'login.php',
+    'dashboard.php',
+    'logout.php',
+    'api/',
+    'modules/',
+    'callback',
+    'process',
+    'initiate_payment.php'
+];
+  
+  const shouldNeverCache = neverCache.some(path => url.pathname.includes(path));
+  
+  // Never cache POST requests or dynamic pages
+  if (event.request.method === 'POST' || shouldNeverCache) {
+    event.respondWith(
+      fetch(event.request)
+        .catch(() => {
+          // If offline and it's a navigation request, show offline page
+          if (event.request.mode === 'navigate') {
+            return caches.match(OFFLINE_URL);
+          }
+          return new Response('Network error', { status: 503 });
+        })
+    );
+    return;
+  }
+  
+  // For navigation requests (HTML pages), use network-first
   if (event.request.mode === 'navigate') {
     event.respondWith(
       fetch(event.request)
         .catch(() => caches.match(OFFLINE_URL))
     );
-  } else {
-    event.respondWith(
-      caches.match(event.request)
-        .then(response => response || fetch(event.request))
-    );
+    return;
   }
+  
+  // For static assets (CSS, JS, images), use cache-first
+  event.respondWith(
+    caches.match(event.request)
+      .then(response => {
+        if (response) {
+          return response; // Return cached version
+        }
+        // Not in cache, fetch from network
+        return fetch(event.request).then(networkResponse => {
+          // Cache the fetched resource for next time (if it's cacheable)
+          if (networkResponse.ok && event.request.url.startsWith('http')) {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then(cache => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return networkResponse;
+        });
+      })
+      .catch(() => {
+        // Both cache and network failed
+        return new Response('Offline - Resource not available', { status: 503 });
+      })
+  );
 });
 
 /**
@@ -111,7 +166,6 @@ self.addEventListener('push', event => {
     badge: '/anglicankenya/assets/icons/icon-72x72.png',
     vibrate: [200, 100, 200]
   };
-
   event.waitUntil(
     self.registration.showNotification('Church MS', options)
   );

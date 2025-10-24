@@ -16022,3 +16022,20 @@
 
 [2025-09-13 14:49:13] [DEBUG] Database connection verified
 [2025-09-13 14:49:13] [DEBUG] Database transaction started
+[2025-10-17 18:25:05] [DEBUG] Starting church details update for user: 4
+[2025-10-17 18:25:05] [DEBUG] File upload attempt for field: certificate | Context: {"file_data":{"name":"certificate_Screenshot_2025-02-10_214122_1755041995_1f32669d5d36a50a.png","size":120358,"type":"image\/png","error":0}}
+[2025-10-17 18:25:05] [DEBUG] File upload attempt for field: certificate | Context: {"file_data":{"name":"certificate_Social_Media_Venn_Diagram_1754703049_624c9377247929e8.png","size":399579,"type":"image\/png","error":0}}
+[2025-10-17 18:30:50] [DEBUG] Starting church details update for user: 4
+[2025-10-17 18:30:50] [DEBUG] File upload attempt for field: certificate | Context: {"file_data":{"name":"certificate_Screenshot_2025-02-10_214122_1755041995_1f32669d5d36a50a.png","size":120358,"type":"image\/png","error":0}}
+[2025-10-17 18:30:50] [DEBUG] File upload attempt for field: certificate | Context: {"file_data":{"name":"certificate_Screenshot_2025-01-08_154707_1755041995_20f13e851d90bcf3.png","size":112354,"type":"image\/png","error":0}}
+[2025-10-17 18:33:48] [DEBUG] Starting church details update for user: 4
+[2025-10-17 18:33:48] [DEBUG] File upload attempt for field: certificate | Context: {"file_data":{"name":"certificate_Screenshot_2025-02-10_214122_1755041995_1f32669d5d36a50a.png","size":120358,"type":"image\/png","error":0}}
+[2025-10-17 18:33:48] [DEBUG] File upload attempt for field: certificate | Context: {"file_data":{"name":"certificate_Social_Media_Venn_Diagram_1754703049_624c9377247929e8.png","size":399579,"type":"image\/png","error":0}}
+[2025-10-18 01:34:18] [DEBUG] Starting church details update for user: 35
+[2025-10-18 01:34:18] [DEBUG] File upload attempt for field: certificate | Context: {"file_data":{"name":"passport_u2_1740570269_67befe9decbbf_1753986004_dd178e691e3d155d.png","size":30971,"type":"image\/png","error":0}}
+[2025-10-18 01:34:18] [DEBUG] File upload attempt for field: certificate | Context: {"file_data":{"name":"passport_u2_super_cabs_template_1754695620_06b2ce5371efe1c0.jpg","size":78917,"type":"image\/jpeg","error":0}}
+[2025-10-18 01:47:09] [DEBUG] Starting church details update for user: 35
+[2025-10-18 01:50:13] [DEBUG] Starting church details update for user: 35
+[2025-10-18 01:50:33] [DEBUG] Starting church details update for user: 35
+[2025-10-18 01:51:16] [DEBUG] Starting church details update for user: 35
+[2025-10-18 02:49:38] [DEBUG] Starting church details update for user: 35

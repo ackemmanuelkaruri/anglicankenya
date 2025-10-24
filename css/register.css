@@ -277,3 +277,40 @@ small.text-muted {
         padding: 10px;
     }
 }
+
+/* Add this to your css/register.css file */
+
+.position-relative {
+    position: relative;
+}
+
+.status-icon {
+    position: absolute;
+    top: 40px; /* Adjust based on your form control height */
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 16px;
+    z-index: 10;
+}
+
+/* Password Strength Bar */
+.password-strength-bar {
+    height: 8px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#passwordStrengthBar {
+    width: 0%;
+    height: 100%;
+    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+/* Icons for criteria list (you may need a font-awesome import for fas classes) */
+.password-criteria i {
+    margin-right: 5px;
+}

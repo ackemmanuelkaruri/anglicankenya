@@ -1,0 +1,31 @@
+[2025-10-23 23:49:00] === REGISTRATION ATTEMPT STARTED ===
+[2025-10-23 23:49:00] Diocese selected: Diocese of Mount Kenya South
+[2025-10-23 23:49:00] Archdeaconry selected: Thimbigua Archdeaconry
+[2025-10-23 23:49:00] Deanery selected: Karuri Deanery
+[2025-10-23 23:49:00] Parish selected: Ack Emmanuel Karuri Parish
+[2025-10-23 23:49:00] User details: mart ben (beniquemart@gmail.com)
+[2025-10-23 23:49:00] Database transaction started
+[2025-10-23 23:49:00] Diocese data loaded: SUCCESS
+[2025-10-23 23:49:00] Archdeaconry found: Thimbigua Archdeaconry
+[2025-10-23 23:49:00] Deanery found: Karuri Deanery
+[2025-10-23 23:49:00] Parish found: Ack Emmanuel Karuri Parish
+[2025-10-23 23:49:00] Validation results - Arch: 1, Dean: 1, Parish: 1
+[2025-10-23 23:49:00] Checking for existing diocese: Diocese of Mount Kenya South
+[2025-10-23 23:49:00] Found existing diocese with ID: 3
+[2025-10-23 23:49:00] Checking for existing archdeaconry: Thimbigua Archdeaconry
+[2025-10-23 23:49:00] Archdeaconry not found, creating new...
+[2025-10-23 23:49:00] Created archdeaconry with ID: 10
+[2025-10-23 23:49:00] Checking for existing deanery: Karuri Deanery
+[2025-10-23 23:49:00] Deanery not found, creating new...
+[2025-10-23 23:49:00] Created deanery with ID: 10
+[2025-10-23 23:49:00] Checking for existing parish: Ack Emmanuel Karuri Parish
+[2025-10-23 23:49:00] Parish not found, creating new...
+[2025-10-23 23:49:00] Created parish with ID: 14
+[2025-10-23 23:49:00] Final IDs - Diocese: 3, Arch: 10, Dean: 10, Parish: 14
+[2025-10-23 23:49:00] Checking for existing organization...
+[2025-10-23 23:49:00] Organization not found, creating new...
+[2025-10-23 23:49:00] Generated org_code: DIOTHIKARACK
+[2025-10-23 23:49:00] Transaction rolled back due to PDO error
+[2025-10-23 23:49:00] PDO ERROR: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'DIOTHIKARACK' for key 'organizations.org_code'
+[2025-10-23 23:49:00] Stack trace: #0 C:\wamp64\www\anglicankenya\register.php(446): PDOStatement->execute(Array)
+#1 {main}

@@ -1,0 +1,1 @@
+log_activity('DELETE_USER', 'users', $user_id);

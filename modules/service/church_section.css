@@ -1,0 +1,354 @@
+/**
+ * Church Section Responsive Styles
+ * Ensures the church section works perfectly on all devices
+ */
+
+/* Church Section Container */
+.church-section {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.church-section h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 1.5em;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+}
+
+.church-section h4 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #34495e;
+    font-size: 1.2em;
+}
+
+/* Form Elements */
+.church-section .mb-3 {
+    margin-bottom: 1.5rem;
+}
+
+.church-section .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #495057;
+    font-size: 0.95rem;
+}
+
+.church-section .form-select,
+.church-section .form-control {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.church-section .form-select:focus,
+.church-section .form-control:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Radio and Checkbox Styles */
+.church-section .form-check {
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+}
+
+.church-section .form-check-input {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.125rem;
+    margin-left: -1.5rem;
+    cursor: pointer;
+}
+
+.church-section .form-check-label {
+    cursor: pointer;
+    padding-left: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Alert Styles */
+.church-section .alert {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 6px;
+}
+
+.church-section .alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+/* File Upload Styles */
+.church-section .form-text {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.church-section input[type="file"] {
+    cursor: pointer;
+}
+
+/* Certificate Links */
+.church-section a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.church-section a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* Save Button */
+.church-section .section-save-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.church-section .section-save-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.church-section .section-save-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.church-section .section-save-btn i {
+    font-size: 1rem;
+}
+
+/* Required Field Indicator */
+.church-section .text-danger {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+/* Small Text */
+.church-section small {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+/* Certificate Display Section */
+.church-section .mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.church-section .mb-2 p {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.95rem;
+}
+
+/* Hidden Sections */
+.church-section [style*="display: none"] {
+    display: none !important;
+}
+
+/* Responsive Design - Tablets */
+@media (max-width: 992px) {
+    .church-section {
+        padding: 18px;
+    }
+    
+    .church-section h3 {
+        font-size: 1.35em;
+    }
+    
+    .church-section h4 {
+        font-size: 1.15em;
+    }
+}
+
+/* Responsive Design - Mobile Landscape */
+@media (max-width: 768px) {
+    .church-section {
+        padding: 15px;
+        margin: 15px 0;
+    }
+    
+    .church-section h3 {
+        font-size: 1.25em;
+        margin-bottom: 15px;
+    }
+    
+    .church-section h4 {
+        font-size: 1.1em;
+        margin-top: 20px;
+    }
+    
+    .church-section .form-select,
+    .church-section .form-control {
+        padding: 0.65rem;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .church-section .form-label {
+        font-size: 0.9rem;
+    }
+    
+    .church-section .section-save-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+        font-size: 1rem;
+    }
+    
+    .church-section .alert {
+        padding: 0.65rem 0.85rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Responsive Design - Mobile Portrait */
+@media (max-width: 576px) {
+    .church-section {
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 6px;
+    }
+    
+    .church-section h3 {
+        font-size: 1.15em;
+        margin-bottom: 12px;
+    }
+    
+    .church-section h4 {
+        font-size: 1em;
+        margin-top: 18px;
+        margin-bottom: 12px;
+    }
+    
+    .church-section .mb-3 {
+        margin-bottom: 1.25rem;
+    }
+    
+    .church-section .form-select,
+    .church-section .form-control {
+        padding: 0.6rem;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .church-section .form-label {
+        font-size: 0.875rem;
+        margin-bottom: 0.4rem;
+    }
+    
+    .church-section .form-check {
+        margin-bottom: 0.65rem;
+    }
+    
+    .church-section .form-check-input {
+        width: 1.15rem;
+        height: 1.15rem;
+    }
+    
+    .church-section .form-check-label {
+        font-size: 0.95rem;
+        padding-left: 0.4rem;
+    }
+    
+    .church-section .section-save-btn {
+        padding: 12px 18px;
+        font-size: 0.95rem;
+    }
+    
+    .church-section .alert {
+        padding: 0.6rem 0.75rem;
+        font-size: 0.85rem;
+    }
+    
+    .church-section .form-text,
+    .church-section small {
+        font-size: 0.8rem;
+    }
+}
+
+/* Small Mobile Devices (iPhone SE, etc.) */
+@media (max-width: 375px) {
+    .church-section {
+        padding: 10px;
+    }
+    
+    .church-section h3 {
+        font-size: 1.1em;
+    }
+    
+    .church-section .form-select,
+    .church-section .form-control {
+        padding: 0.55rem;
+    }
+    
+    .church-section .section-save-btn {
+        padding: 11px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Accessibility - High Contrast Mode */
+@media (prefers-contrast: high) {
+    .church-section .form-select,
+    .church-section .form-control {
+        border-width: 2px;
+    }
+    
+    .church-section .section-save-btn {
+        border: 2px solid #fff;
+    }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .church-section .section-save-btn,
+    .church-section .form-select,
+    .church-section .form-control,
+    .church-section a {
+        transition: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .church-section .section-save-btn {
+        display: none;
+    }
+    
+    .church-section {
+        border: 1px solid #000;
+        page-break-inside: avoid;
+    }
+}

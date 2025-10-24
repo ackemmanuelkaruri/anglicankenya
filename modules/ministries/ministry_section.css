@@ -1,0 +1,96 @@
+/* File: modules/ministries/ministry_section.css */
+/**
+ * Ministry Section Responsive Styles
+ * Based on church_section.css for visual consistency.
+ */
+
+.ministry-section {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.ministry-section h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 1.5em;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+}
+
+.ministry-section h4 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #34495e;
+    font-size: 1.2em;
+}
+
+/* Checkbox Grid Layout for better usability */
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.ministry-actions {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-save-section {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #3498db; /* Primary Blue */
+    color: white;
+    font-weight: 600;
+}
+
+.btn-delete-section {
+    padding: 10px 15px;
+    border: 1px solid #e74c3c; /* Danger Red */
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+    .checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.btn-clear-selections {
+    padding: 10px 15px;
+    border: 1px solid #95a5a6;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+    color: #7f8c8d;
+    font-weight: 600;
+}
+
+.btn-clear-selections:hover {
+    background-color: #ecf0f1;
+    border-color: #7f8c8d;
+}
+
+.btn-save-section:hover {
+    background-color: #2980b9;
+}
+
+.btn-delete-section:hover {
+    background-color: #e74c3c;
+    color: white;
+}

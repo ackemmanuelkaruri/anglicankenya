@@ -1,0 +1,140 @@
+/**
+ * ============================================
+ * IMPERSONATION BANNER STYLES
+ * Styles for the admin impersonation warning banner
+ * ============================================
+ */
+
+.impersonation-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    color: white;
+    padding: 12px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid #c92a2a;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.impersonation-banner .container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.impersonation-banner strong {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.impersonation-banner .btn-stop-impersonate {
+    background: white;
+    color: #c92a2a;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 25px;
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.impersonation-banner .btn-stop-impersonate:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: #f8f9fa;
+}
+
+.impersonation-banner .btn-stop-impersonate:active {
+    transform: scale(0.98);
+}
+
+/* Adjust body and layout when impersonating */
+body.impersonating {
+    padding-top: 60px;
+}
+
+body.impersonating .sidebar {
+    top: 60px;
+    height: calc(100vh - 60px);
+}
+
+body.impersonating .main-content {
+    margin-top: 0;
+    padding-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .impersonation-banner {
+        padding: 10px 15px;
+    }
+    
+    .impersonation-banner .container-fluid {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .impersonation-banner strong {
+        font-size: 14px;
+    }
+    
+    .impersonation-banner .btn-stop-impersonate {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 15px;
+    }
+    
+    body.impersonating {
+        padding-top: 100px;
+    }
+    
+    body.impersonating .sidebar {
+        top: 100px;
+        height: calc(100vh - 100px);
+    }
+}
+
+/* Pulsing effect for attention */
+.impersonation-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    animation: pulse 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}

@@ -720,3 +720,68 @@
         font-size: 1.3rem;
     }
 }
+
+<style>
+    /* Additional styling for form */
+    .card {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .card-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+        padding: 1rem 1.25rem;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: #495057;
+    }
+    
+    .text-danger {
+        color: #dc3545;
+    }
+    
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+    
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+    
+    .img-thumbnail {
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 0.25rem;
+    }
+    
+    /* Save button states */
+    .section-save-btn.saving {
+        background-color: #6c757d;
+        cursor: not-allowed;
+    }
+    
+    .section-save-btn.save-success {
+        background-color: #28a745;
+    }
+    
+    .section-save-btn.save-error {
+        background-color: #dc3545;
+    }
+</style>

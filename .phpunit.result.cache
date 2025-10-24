@@ -1,1 +1,1 @@
-{"version":2,"defects":[],"times":{"AuthTest::testLoginWithValidUser":0.314,"AuthTest::testLoginWithInvalidUser":0.042,"DatabaseTest::testUsersTableExists":0.102,"DatabaseTest::testInsertUser":0.077}}
+{"version":2,"defects":[],"times":{"AuthTest::testLoginWithValidUser":0.317,"AuthTest::testLoginWithInvalidUser":0.021,"DatabaseTest::testUsersTableExists":0.007,"DatabaseTest::testInsertUser":0.045}}

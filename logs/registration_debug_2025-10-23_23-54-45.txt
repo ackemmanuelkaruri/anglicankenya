@@ -1,0 +1,34 @@
+[2025-10-23 23:54:45] === REGISTRATION ATTEMPT STARTED ===
+[2025-10-23 23:54:45] Diocese selected: Diocese of Mount Kenya South
+[2025-10-23 23:54:45] Archdeaconry selected: Thimbigua Archdeaconry
+[2025-10-23 23:54:45] Deanery selected: Muchatha Deanery
+[2025-10-23 23:54:45] Parish selected: Ack Muchatha
+[2025-10-23 23:54:45] User details: mart ben (beniquemart@gmail.com)
+[2025-10-23 23:54:45] Database transaction started
+[2025-10-23 23:54:45] Diocese data loaded: SUCCESS
+[2025-10-23 23:54:45] Archdeaconry found: Thimbigua Archdeaconry
+[2025-10-23 23:54:45] Deanery found: Muchatha Deanery
+[2025-10-23 23:54:45] Parish found: Ack Muchatha
+[2025-10-23 23:54:45] Validation results - Arch: 1, Dean: 1, Parish: 1
+[2025-10-23 23:54:45] Checking for existing diocese: Diocese of Mount Kenya South
+[2025-10-23 23:54:45] Found existing diocese with ID: 3
+[2025-10-23 23:54:45] Checking for existing archdeaconry: Thimbigua Archdeaconry
+[2025-10-23 23:54:45] Archdeaconry not found, creating new...
+[2025-10-23 23:54:45] Created archdeaconry with ID: 14
+[2025-10-23 23:54:45] Checking for existing deanery: Muchatha Deanery
+[2025-10-23 23:54:45] Deanery not found, creating new...
+[2025-10-23 23:54:45] Created deanery with ID: 14
+[2025-10-23 23:54:45] Checking for existing parish: Ack Muchatha
+[2025-10-23 23:54:45] Parish not found, creating new...
+[2025-10-23 23:54:45] Created parish with ID: 18
+[2025-10-23 23:54:45] Final IDs - Diocese: 3, Arch: 14, Dean: 14, Parish: 18
+[2025-10-23 23:54:45] Checking for existing organization...
+[2025-10-23 23:54:45] Organization not found, creating new...
+[2025-10-23 23:54:45] Generated org_code: DIOTHIMUCACK
+[2025-10-23 23:54:45] Created organization with ID: 14
+[2025-10-23 23:54:45] Checking for duplicate username/email...
+[2025-10-23 23:54:45] ERROR: Duplicate username or email found
+[2025-10-23 23:54:45] Transaction rolled back
+[2025-10-23 23:54:45] === REGISTRATION ATTEMPT COMPLETED ===
+
+

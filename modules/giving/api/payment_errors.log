@@ -1,0 +1,86 @@
+[22-Oct-2025 02:01:00 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 02:03:13 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 02:03:23 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 02:17:13 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 02:20:06 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 02:24:17 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 02:26:55 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 02:30:39 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 02:35:55 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 02:36:02 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 02:37:24 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 03:04:14 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 03:04:14 UTC] PHP Warning:  Undefined array key "consumer_key" in C:\wamp64\www\anglicankenya\modules\giving\includes\mpesa_adapter.php on line 19
+[22-Oct-2025 03:04:14 UTC] PHP Warning:  Undefined array key "consumer_secret" in C:\wamp64\www\anglicankenya\modules\giving\includes\mpesa_adapter.php on line 20
+[22-Oct-2025 03:04:14 UTC] M-Pesa Config Loaded - Environment: sandbox
+[22-Oct-2025 03:04:14 UTC] M-Pesa Error: Consumer Key not set
+[22-Oct-2025 03:07:14 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 03:07:14 UTC] PHP Warning:  Undefined array key "consumer_key" in C:\wamp64\www\anglicankenya\modules\giving\includes\mpesa_adapter.php on line 19
+[22-Oct-2025 03:07:14 UTC] PHP Warning:  Undefined array key "consumer_secret" in C:\wamp64\www\anglicankenya\modules\giving\includes\mpesa_adapter.php on line 20
+[22-Oct-2025 03:07:14 UTC] M-Pesa Config Loaded - Environment: sandbox
+[22-Oct-2025 03:07:14 UTC] M-Pesa Error: Consumer Key not set
+[22-Oct-2025 03:09:43 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 03:09:43 UTC] PHP Warning:  Undefined array key "consumer_key" in C:\wamp64\www\anglicankenya\modules\giving\includes\mpesa_adapter.php on line 19
+[22-Oct-2025 03:09:43 UTC] PHP Warning:  Undefined array key "consumer_secret" in C:\wamp64\www\anglicankenya\modules\giving\includes\mpesa_adapter.php on line 20
+[22-Oct-2025 03:09:43 UTC] M-Pesa Config Loaded - Environment: sandbox
+[22-Oct-2025 03:09:43 UTC] M-Pesa Error: Consumer Key not set
+[22-Oct-2025 03:12:01 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 03:12:01 UTC] M-Pesa Config Loaded - Environment: sandbox
+[22-Oct-2025 03:12:02 UTC] M-Pesa STK Push Request: {"BusinessShortCode":"174379","Password":"MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjUxMDIyMDMxMjAy","Timestamp":"20251022031202","TransactionType":"CustomerPayBillOnline","Amount":10,"PartyA":"254701678599","PartyB":"174379","PhoneNumber":"254701678599","CallBackURL":"https:\/\/noncapitalistic-francisco-lunisolar.ngrok-free.dev\/anglicankenya\/modules\/giving\/api\/mpesa_callback.php","AccountReference":"DN07113","TransactionDesc":"TITHE\/OFFERING"}
+[22-Oct-2025 03:12:03 UTC] M-Pesa STK Push Response: {
+            "MerchantRequestID":"d6cf-44e7-b3a0-c8178af147274331",
+            "CheckoutRequestID":"ws_CO_22102025061202951701678599",
+            "ResponseCode": "0",
+            "ResponseDescription":"Success. Request accepted for processing",
+            "CustomerMessage":"Success. Request accepted for processing"
+        }
+        
+[22-Oct-2025 03:12:03 UTC] Error creating giving transaction: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'status' in 'field list'
+[22-Oct-2025 03:14:11 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 03:14:20 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 03:14:56 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 03:16:42 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 03:17:33 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 23:22:03 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 23:23:33 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 23:36:47 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 23:46:33 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 23:50:47 UTC] Database connected: anglicankenya on localhost
+[22-Oct-2025 23:50:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function format_phone_number() in C:\wamp64\www\anglicankenya\modules\giving\api\initiate_payment.php:79
+Stack trace:
+#0 {main}
+  thrown in C:\wamp64\www\anglicankenya\modules\giving\api\initiate_payment.php on line 79
+[23-Oct-2025 00:00:07 UTC] Database connected: anglicankenya on localhost
+[23-Oct-2025 00:00:07 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function format_phone_number() in C:\wamp64\www\anglicankenya\modules\giving\api\initiate_payment.php:85
+Stack trace:
+#0 {main}
+  thrown in C:\wamp64\www\anglicankenya\modules\giving\api\initiate_payment.php on line 85
+[23-Oct-2025 00:00:30 UTC] Database connected: anglicankenya on localhost
+[23-Oct-2025 00:00:30 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function format_phone_number() in C:\wamp64\www\anglicankenya\modules\giving\api\initiate_payment.php:85
+Stack trace:
+#0 {main}
+  thrown in C:\wamp64\www\anglicankenya\modules\giving\api\initiate_payment.php on line 85
+[23-Oct-2025 00:06:17 UTC] Database connected: anglicankenya on localhost
+[23-Oct-2025 00:06:17 UTC] M-Pesa Config Loaded - Environment: sandbox
+[23-Oct-2025 00:06:17 UTC] M-Pesa STK Push Request: {"BusinessShortCode":"174379","Password":"MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjUxMDIzMDAwNjE3","Timestamp":"20251023000617","TransactionType":"CustomerPayBillOnline","Amount":10,"PartyA":"254701678599","PartyB":"174379","PhoneNumber":"254701678599","CallBackURL":"https:\/\/noncapitalistic-francisco-lunisolar.ngrok-free.dev\/anglicankenya\/modules\/giving\/api\/mpesa_callback.php","AccountReference":"DN07113","TransactionDesc":"TITHE\/OFFERING"}
+[23-Oct-2025 00:06:18 UTC] M-Pesa STK Push Response: {
+            "MerchantRequestID":"5b65-43dd-b2ba-5fea49a390e833962",
+            "CheckoutRequestID":"ws_CO_23102025030618046701678599",
+            "ResponseCode": "0",
+            "ResponseDescription":"Success. Request accepted for processing",
+            "CustomerMessage":"Success. Request accepted for processing"
+        }
+        
+[23-Oct-2025 00:06:18 UTC] Error creating giving transaction: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'payment_status' in 'field list'
+[23-Oct-2025 00:16:42 UTC] Database connected: anglicankenya on localhost
+[23-Oct-2025 00:16:42 UTC] M-Pesa Config Loaded - Environment: sandbox
+[23-Oct-2025 00:16:43 UTC] M-Pesa STK Push Request: {"BusinessShortCode":"174379","Password":"MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjUxMDIzMDAxNjQz","Timestamp":"20251023001643","TransactionType":"CustomerPayBillOnline","Amount":10,"PartyA":"254701678599","PartyB":"174379","PhoneNumber":"254701678599","CallBackURL":"https:\/\/noncapitalistic-francisco-lunisolar.ngrok-free.dev\/anglicankenya\/modules\/giving\/api\/mpesa_callback.php","AccountReference":"DN07113","TransactionDesc":"TITHE\/OFFERING"}
+[23-Oct-2025 00:16:44 UTC] M-Pesa STK Push Response: {
+            "MerchantRequestID":"de49-410d-a871-fed6ea25c34710306",
+            "CheckoutRequestID":"ws_CO_23102025031644014701678599",
+            "ResponseCode": "0",
+            "ResponseDescription":"Success. Request accepted for processing",
+            "CustomerMessage":"Success. Request accepted for processing"
+        }
+        
+[23-Oct-2025 00:16:44 UTC] BUFFER CONTENT: efbbbf

@@ -4,7 +4,11 @@
  * Provides statistics data for different user roles
  */
 
-require_once 'db.php';
+// --- FIX APPLIED HERE ---
+// __DIR__ is the absolute path to the current directory (includes/).
+// We use '/../' to go up one level (to anglicankenya/) and then append 'db.php'.
+require_once __DIR__ . '/../db.php'; 
+require_once 'security.php'; // This remains 'security.php' as it is in the same folder (includes/)
 
 /**
  * Get dashboard statistics based on user role
@@ -94,6 +98,57 @@ function get_dashboard_stats() {
             $stats['family_members'] = get_family_member_count($user_id);
             $stats['my_ministries'] = get_user_ministries_count($user_id);
             break;
+    }
+    
+    // Get giving statistics
+    if ($role_level === 'parish_admin' || $role_level === 'diocese_admin' || $role_level === 'super_admin') {
+        // Get parish_id for the admin
+        $parish_id = $_SESSION['parish_id'] ?? ($user['parish_id'] ?? 0);
+        
+        if ($parish_id) {
+            // Monthly giving for parish
+            $stmt = $pdo->prepare("
+                SELECT SUM(amount) as total_amount, COUNT(*) as total_count
+                FROM givings 
+                WHERE parish_id = ? 
+                AND status = 'completed'
+                AND MONTH(created_at) = MONTH(CURRENT_DATE())
+                AND YEAR(created_at) = YEAR(CURRENT_DATE())
+            ");
+            $stmt->execute([$parish_id]);
+            $monthlyGiving = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            $stats['monthly_giving'] = $monthlyGiving['total_amount'] ?? 0;
+            
+            // Active campaigns
+            $stmt = $pdo->prepare("
+                SELECT COUNT(*) as total
+                FROM donation_campaigns 
+                WHERE parish_id = ? 
+                AND is_active = 1
+                AND end_date >= CURDATE()
+            ");
+            $stmt->execute([$parish_id]);
+            $campaigns = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            $stats['active_campaigns'] = $campaigns['total'] ?? 0;
+        } else {
+            $stats['monthly_giving'] = 0;
+            $stats['active_campaigns'] = 0;
+        }
+    } else {
+        // User's giving this year
+        $stmt = $pdo->prepare("
+            SELECT SUM(amount) as total_amount
+            FROM givings 
+            WHERE member_id = ? 
+            AND status = 'completed'
+            AND YEAR(created_at) = YEAR(CURRENT_DATE())
+        ");
+        $stmt->execute([$user_id]);
+        $userGiving = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        $stats['user_giving'] = $userGiving['total_amount'] ?? 0;
     }
     
     return $stats;
@@ -374,7 +429,3 @@ function get_user_ministries_count($user_id) {
         return 0;
     }
 }
-
-// REMOVED DUPLICATE FUNCTIONS:
-// - get_role_display_name() - Already defined in security.php
-// - get_scope_display() - Already defined in security.php

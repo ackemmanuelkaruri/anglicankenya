@@ -1,0 +1,53 @@
+/**
+ * employment_section.css
+ * Dedicated Styles for the Employment Section
+ */
+
+.employment-section {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.employment-section h3 {
+    color: #007bff; /* Primary Blue */
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+.employment-role {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px dashed #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+.employment-role h4 {
+    color: #333;
+    font-size: 1.15em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-left: 5px solid #ffc107; /* Warning Yellow */
+    padding-left: 10px;
+}
+
+.employment-section .btn-remove-employment-role {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    font-size: 0.9em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .employment-section {
+        padding: 15px;
+    }
+    .date-group {
+        margin-bottom: 1rem;
+    }
+}

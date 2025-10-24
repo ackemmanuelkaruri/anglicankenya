@@ -104,3 +104,4 @@
 [2025-09-13 06:34:06] [ERROR] Exception in main update handler | Context: {"message":"Invalid section type: 'family'. Allowed types: personal, church, employment, clergy, ministry, leadership","file":"C:\\wamp64\\www\\emmanuelkaruri\\user\\usection_update.php","line":160,"trace":"#0 {main}"}
 [2025-09-13 06:34:06] [ERROR] Invalid section type provided | Context: {"section_type":"family"}
 [2025-09-13 06:34:06] [ERROR] Exception in main update handler | Context: {"message":"Invalid section type: 'family'. Allowed types: personal, church, employment, clergy, ministry, leadership","file":"C:\\wamp64\\www\\emmanuelkaruri\\user\\usection_update.php","line":160,"trace":"#0 {main}"}
+[2025-10-17 18:25:05] [ERROR] Church details update failed | Context: {"error":"SQLSTATE[42S22]: Column not found: 1054 Unknown column 'departments' in 'field list'"}

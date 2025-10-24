@@ -1,0 +1,28 @@
+2025-10-15 17:49:36 - Script started
+REQUEST_METHOD: POST
+POST data: {"user_id":"7","role_level":"archdeaconry_admin"}
+SESSION data: null
+2025-10-15 17:49:36 - Script started
+2025-10-15 17:49:36 - POST data: {"user_id":"7","role_level":"archdeaconry_admin"}
+2025-10-15 17:51:27 - Script started
+2025-10-15 17:51:27 - POST data: {"user_id":"7","role_level":"archdeaconry_admin"}
+2025-10-15 17:51:42 - Script started
+2025-10-15 17:51:42 - POST data: {"user_id":"7","role_level":"member"}
+2025-10-15 17:51:57 - Script started
+2025-10-15 17:51:57 - POST data: {"user_id":"19","role_level":"member"}
+2025-10-15 17:52:05 - Script started
+2025-10-15 17:52:05 - POST data: {"user_id":"19","role_level":"parish_admin"}
+2025-10-15 17:52:12 - Script started
+2025-10-15 17:52:12 - POST data: {"user_id":"19","role_level":"deanery_admin"}
+2025-10-15 18:25:10 - Script started
+2025-10-15 18:25:10 - POST data: {"user_id":"10","role_level":"member","csrf_token":"edf1dedde6ed53438eadff9857b3e4f5e267c84be4aa9f19e7dc4eeb506cb930"}
+2025-10-15 18:25:23 - Script started
+2025-10-15 18:25:23 - POST data: {"user_id":"11","role_level":"parish_admin","csrf_token":"edf1dedde6ed53438eadff9857b3e4f5e267c84be4aa9f19e7dc4eeb506cb930"}
+2025-10-15 21:48:04 - Script started
+2025-10-15 21:48:04 - POST data: {"user_id":"12","role_level":"parish_admin","csrf_token":"256fd951ad7a86633f845312a91c17f6984144c8b922cecd36b371586992cb3b"}
+2025-10-15 21:48:11 - Script started
+2025-10-15 21:48:11 - POST data: {"user_id":"12","role_level":"member","csrf_token":"256fd951ad7a86633f845312a91c17f6984144c8b922cecd36b371586992cb3b"}
+2025-10-19 17:01:11 - Script started
+2025-10-19 17:01:11 - POST data: {"user_id":"35","role_level":"super_admin","csrf_token":"7576f06f29ee80d1b79fcdb96611e29ab0bd940f3c909d26c4cc2d851c1df984"}
+2025-10-24 01:50:01 - Script started
+2025-10-24 01:50:01 - POST data: {"user_id":"36","role_level":"super_admin","csrf_token":"7ae3d60f4965bd693a958431c62645c6757aff2fbf33b92ecbb27705f78c5761"}

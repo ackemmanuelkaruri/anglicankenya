@@ -13,20 +13,20 @@ function get_environment() {
     if (php_sapi_name() === 'cli') {
         return 'development';
     }
-
+    
     // For web requests, use HTTP_HOST safely
     $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
-
+    
     // Check for localhost (development)
     if (in_array($host, ['localhost', '127.0.0.1', 'localhost:8080', 'localhost:80'])) {
         return 'development';
     }
-
+    
     // Check for staging domains
     if (strpos($host, 'staging.') === 0) {
         return 'staging';
     }
-
+    
     // Everything else = production
     return 'production';
 }
@@ -35,25 +35,28 @@ function get_environment() {
 function load_config() {
     $env = get_environment();
     $config_file = __DIR__ . "/.env.{$env}";
-
+    
     if (!file_exists($config_file)) {
         die("Configuration file not found: .env.{$env}");
     }
-
+    
     // Parse .env file
     $lines = file($config_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    
     foreach ($lines as $line) {
         // Skip comments
         if (strpos(trim($line), '#') === 0) continue;
-
+        
         // Parse KEY=VALUE
         if (strpos($line, '=') !== false) {
             list($key, $value) = explode('=', $line, 2);
             $key = trim($key);
             $value = trim($value);
-
+            
             // Set as constant if not already defined
-            if (!defined($key)) define($key, $value);
+            if (!defined($key)) {
+                define($key, $value);
+            }
         }
     }
 }
@@ -95,3 +98,5 @@ if (is_development()) {
     ini_set('log_errors', 1);
     ini_set('error_log', __DIR__ . '/logs/php-errors.log');
 }
+
+// ✅ NO CLOSING TAG - Prevents whitespace/BOM issues

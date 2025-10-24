@@ -1,0 +1,44 @@
+[2025-10-18 00:30:19] === REGISTRATION ATTEMPT STARTED ===
+[2025-10-18 00:30:19] Diocese selected: Diocese of Bungoma
+[2025-10-18 00:30:19] Archdeaconry selected: Archdeaconry 2
+[2025-10-18 00:30:19] Deanery selected: Deanery 1
+[2025-10-18 00:30:19] Parish selected: Parish 1
+[2025-10-18 00:30:19] User details: emmanuel karara (bernardkimani500@gmail.com)
+[2025-10-18 00:30:19] Database transaction started
+[2025-10-18 00:30:19] Diocese data loaded: SUCCESS
+[2025-10-18 00:30:19] Archdeaconry found: Archdeaconry 2
+[2025-10-18 00:30:19] Deanery found: Deanery 1
+[2025-10-18 00:30:19] Parish found: Parish 1
+[2025-10-18 00:30:19] Validation results - Arch: 1, Dean: 1, Parish: 1
+[2025-10-18 00:30:19] Checking for existing diocese: Diocese of Bungoma
+[2025-10-18 00:30:19] Found existing diocese with ID: 25
+[2025-10-18 00:30:19] Checking for existing archdeaconry: Archdeaconry 2
+[2025-10-18 00:30:19] Archdeaconry not found, creating new...
+[2025-10-18 00:30:19] Created archdeaconry with ID: 8
+[2025-10-18 00:30:19] Checking for existing deanery: Deanery 1
+[2025-10-18 00:30:19] Deanery not found, creating new...
+[2025-10-18 00:30:19] Created deanery with ID: 8
+[2025-10-18 00:30:19] Checking for existing parish: Parish 1
+[2025-10-18 00:30:19] Parish not found, creating new...
+[2025-10-18 00:30:19] Created parish with ID: 12
+[2025-10-18 00:30:19] Final IDs - Diocese: 25, Arch: 8, Dean: 8, Parish: 12
+[2025-10-18 00:30:19] Checking for existing organization...
+[2025-10-18 00:30:19] Organization not found, creating new...
+[2025-10-18 00:30:19] Generated org_code: DIOARCDEAPAR
+[2025-10-18 00:30:19] Created organization with ID: 8
+[2025-10-18 00:30:19] Checking for duplicate username/email...
+[2025-10-18 00:30:19] No duplicates found, proceeding with user creation...
+[2025-10-18 00:30:19] Generated verification token
+[2025-10-18 00:30:19] Password hashed with ARGON2ID
+[2025-10-18 00:30:19] Phone normalized to: +254720012104
+[2025-10-18 00:30:19] Inserting user record...
+[2025-10-18 00:30:19] Values - Org: 8, Diocese: 25, Arch: 8, Dean: 8, Parish: 12
+[2025-10-18 00:30:19] User created with ID: 35
+[2025-10-18 00:30:19] Transaction committed successfully
+[2025-10-18 00:30:19] Verification - Saved user data: {"diocese_id":25,"archdeaconry_id":8,"deanery_id":8,"parish_id":12}
+[2025-10-18 00:30:19] Attempting to send verification email...
+[2025-10-18 00:30:24] Email send result: SUCCESS
+[2025-10-18 00:30:24] Registration completed successfully
+[2025-10-18 00:30:24] === REGISTRATION ATTEMPT COMPLETED ===
+
+

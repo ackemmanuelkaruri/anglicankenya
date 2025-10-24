@@ -1,0 +1,39 @@
+[2025-10-18 00:16:42] === REGISTRATION ATTEMPT STARTED ===
+[2025-10-18 00:16:42] Diocese selected: Diocese of Bungoma
+[2025-10-18 00:16:42] Archdeaconry selected: Archdeaconry 2
+[2025-10-18 00:16:42] Deanery selected: Deanery 1
+[2025-10-18 00:16:42] Parish selected: Parish 1
+[2025-10-18 00:16:42] User details: emmanuel karara (bernardkimani500@gmail.com)
+[2025-10-18 00:16:42] Database transaction started
+[2025-10-18 00:16:42] Diocese data loaded: SUCCESS
+[2025-10-18 00:16:42] Archdeaconry found: Archdeaconry 2
+[2025-10-18 00:16:42] Deanery found: Deanery 1
+[2025-10-18 00:16:42] Parish found: Parish 1
+[2025-10-18 00:16:42] Validation results - Arch: 1, Dean: 1, Parish: 1
+[2025-10-18 00:16:42] Checking for existing diocese: Diocese of Bungoma
+[2025-10-18 00:16:42] Found existing diocese with ID: 25
+[2025-10-18 00:16:42] Checking for existing archdeaconry: Archdeaconry 2
+[2025-10-18 00:16:42] Archdeaconry not found, creating new...
+[2025-10-18 00:16:42] Created archdeaconry with ID: 7
+[2025-10-18 00:16:42] Checking for existing deanery: Deanery 1
+[2025-10-18 00:16:42] Deanery not found, creating new...
+[2025-10-18 00:16:42] Created deanery with ID: 7
+[2025-10-18 00:16:42] Checking for existing parish: Parish 1
+[2025-10-18 00:16:42] Parish not found, creating new...
+[2025-10-18 00:16:42] Created parish with ID: 11
+[2025-10-18 00:16:42] Final IDs - Diocese: 25, Arch: 7, Dean: 7, Parish: 11
+[2025-10-18 00:16:42] Checking for existing organization...
+[2025-10-18 00:16:42] Organization not found, creating new...
+[2025-10-18 00:16:42] Generated org_code: DIOARCDEAPAR
+[2025-10-18 00:16:42] Created organization with ID: 7
+[2025-10-18 00:16:42] Checking for duplicate username/email...
+[2025-10-18 00:16:42] No duplicates found, proceeding with user creation...
+[2025-10-18 00:16:42] Generated verification token
+[2025-10-18 00:16:42] Password hashed with ARGON2ID
+[2025-10-18 00:16:42] Phone normalized to: +254720012104
+[2025-10-18 00:16:42] Inserting user record...
+[2025-10-18 00:16:42] Values - Org: 7, Diocese: 25, Arch: 7, Dean: 7, Parish: 11
+[2025-10-18 00:16:42] Transaction rolled back due to PDO error
+[2025-10-18 00:16:42] PDO ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'field list'
+[2025-10-18 00:16:42] Stack trace: #0 C:\wamp64\www\anglicankenya\register.php(482): PDO->prepare('\r\n             ...')
+#1 {main}

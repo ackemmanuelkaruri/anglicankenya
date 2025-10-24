@@ -73,7 +73,7 @@ class FileUploadHandler {
             }
             
             // Skip processing if no file was uploaded (and it's optional)
-            if ($uploadResult['no_file']) {
+            if (isset($uploadResult['no_file']) && $uploadResult['no_file']) {
                 return ['success' => true, 'message' => 'No file uploaded', 'filename' => null];
             }
             

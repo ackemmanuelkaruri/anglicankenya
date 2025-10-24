@@ -1,0 +1,44 @@
+[2025-10-24 01:38:24] === REGISTRATION ATTEMPT STARTED ===
+[2025-10-24 01:38:24] Diocese selected: Diocese of Mount Kenya South
+[2025-10-24 01:38:24] Archdeaconry selected: Thimbigua Archdeaconry
+[2025-10-24 01:38:24] Deanery selected: Muchatha Deanery
+[2025-10-24 01:38:24] Parish selected: Ack Muchatha
+[2025-10-24 01:38:24] User details: ben mart (beniquemart@gmail.com)
+[2025-10-24 01:38:24] Database transaction started
+[2025-10-24 01:38:24] Diocese data loaded: SUCCESS
+[2025-10-24 01:38:24] Archdeaconry found: Thimbigua Archdeaconry
+[2025-10-24 01:38:24] Deanery found: Muchatha Deanery
+[2025-10-24 01:38:24] Parish found: Ack Muchatha
+[2025-10-24 01:38:24] Validation results - Arch: 1, Dean: 1, Parish: 1
+[2025-10-24 01:38:24] Checking for existing diocese: Diocese of Mount Kenya South
+[2025-10-24 01:38:24] Found existing diocese with ID: 3
+[2025-10-24 01:38:24] Checking for existing archdeaconry: Thimbigua Archdeaconry
+[2025-10-24 01:38:24] Archdeaconry not found, creating new...
+[2025-10-24 01:38:24] Created archdeaconry with ID: 16
+[2025-10-24 01:38:24] Checking for existing deanery: Muchatha Deanery
+[2025-10-24 01:38:24] Deanery not found, creating new...
+[2025-10-24 01:38:24] Created deanery with ID: 16
+[2025-10-24 01:38:24] Checking for existing parish: Ack Muchatha
+[2025-10-24 01:38:24] Parish not found, creating new...
+[2025-10-24 01:38:24] Created parish with ID: 20
+[2025-10-24 01:38:24] Final IDs - Diocese: 3, Arch: 16, Dean: 16, Parish: 20
+[2025-10-24 01:38:24] Checking for existing organization...
+[2025-10-24 01:38:24] Organization not found, creating new...
+[2025-10-24 01:38:24] Generated org_code: DIOTHIMUCACK
+[2025-10-24 01:38:24] Created organization with ID: 16
+[2025-10-24 01:38:24] Checking for duplicate username/email...
+[2025-10-24 01:38:24] No duplicates found, proceeding with user creation...
+[2025-10-24 01:38:24] Generated verification token
+[2025-10-24 01:38:24] Password hashed with ARGON2ID
+[2025-10-24 01:38:24] Phone normalized to: +254701678599
+[2025-10-24 01:38:24] Inserting user record...
+[2025-10-24 01:38:24] Values - Org: 16, Diocese: 3, Arch: 16, Dean: 16, Parish: 20
+[2025-10-24 01:38:24] User created with ID: 36
+[2025-10-24 01:38:24] Transaction committed successfully
+[2025-10-24 01:38:24] Verification - Saved user data: {"diocese_id":3,"archdeaconry_id":16,"deanery_id":16,"parish_id":20,"date_of_birth":"1995-01-01"}
+[2025-10-24 01:38:24] Attempting to send verification email...
+[2025-10-24 01:38:29] Email send result: SUCCESS
+[2025-10-24 01:38:29] Registration completed successfully
+[2025-10-24 01:38:29] === REGISTRATION ATTEMPT COMPLETED ===
+
+

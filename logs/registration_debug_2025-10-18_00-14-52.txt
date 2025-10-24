@@ -1,0 +1,40 @@
+[2025-10-18 00:14:52] === REGISTRATION ATTEMPT STARTED ===
+[2025-10-18 00:14:52] Diocese selected: Diocese of Marsabit
+[2025-10-18 00:14:52] Archdeaconry selected: Archdeaconry 1
+[2025-10-18 00:14:52] Deanery selected: Deanery 1
+[2025-10-18 00:14:52] Parish selected: Parish 1
+[2025-10-18 00:14:52] User details: emmanuel karara (bernardkimani500@gmail.com)
+[2025-10-18 00:14:52] Database transaction started
+[2025-10-18 00:14:52] Diocese data loaded: SUCCESS
+[2025-10-18 00:14:52] Archdeaconry found: Archdeaconry 1
+[2025-10-18 00:14:52] Deanery found: Deanery 1
+[2025-10-18 00:14:52] Parish found: Parish 1
+[2025-10-18 00:14:52] Validation results - Arch: 1, Dean: 1, Parish: 1
+[2025-10-18 00:14:52] Checking for existing diocese: Diocese of Marsabit
+[2025-10-18 00:14:52] Diocese not found, creating new...
+[2025-10-18 00:14:52] Created diocese with ID: 39
+[2025-10-18 00:14:52] Checking for existing archdeaconry: Archdeaconry 1
+[2025-10-18 00:14:52] Archdeaconry not found, creating new...
+[2025-10-18 00:14:52] Created archdeaconry with ID: 6
+[2025-10-18 00:14:52] Checking for existing deanery: Deanery 1
+[2025-10-18 00:14:52] Deanery not found, creating new...
+[2025-10-18 00:14:52] Created deanery with ID: 6
+[2025-10-18 00:14:52] Checking for existing parish: Parish 1
+[2025-10-18 00:14:52] Parish not found, creating new...
+[2025-10-18 00:14:52] Created parish with ID: 10
+[2025-10-18 00:14:52] Final IDs - Diocese: 39, Arch: 6, Dean: 6, Parish: 10
+[2025-10-18 00:14:52] Checking for existing organization...
+[2025-10-18 00:14:52] Organization not found, creating new...
+[2025-10-18 00:14:52] Generated org_code: DIOARCDEAPAR
+[2025-10-18 00:14:52] Created organization with ID: 6
+[2025-10-18 00:14:52] Checking for duplicate username/email...
+[2025-10-18 00:14:52] No duplicates found, proceeding with user creation...
+[2025-10-18 00:14:52] Generated verification token
+[2025-10-18 00:14:52] Password hashed with ARGON2ID
+[2025-10-18 00:14:52] Phone normalized to: +254720012104
+[2025-10-18 00:14:52] Inserting user record...
+[2025-10-18 00:14:52] Values - Org: 6, Diocese: 39, Arch: 6, Dean: 6, Parish: 10
+[2025-10-18 00:14:52] Transaction rolled back due to PDO error
+[2025-10-18 00:14:52] PDO ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'field list'
+[2025-10-18 00:14:52] Stack trace: #0 C:\wamp64\www\anglicankenya\register.php(482): PDO->prepare('\r\n             ...')
+#1 {main}

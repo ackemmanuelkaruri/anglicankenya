@@ -1,0 +1,52 @@
+/**
+ * family_section.css
+ * Dedicated Styles for the Family & Dependents Section
+ */
+
+.family-section {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f0f8ff; /* Light Blue/Info Color */
+    border-radius: 8px;
+    border: 1px solid #b8daff;
+}
+
+.family-section h3 {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+.family-section .nav-tabs {
+    margin-bottom: 15px;
+}
+
+.family-section .list-group-item {
+    border-left: 5px solid;
+}
+
+/* Style for Linked Users (Members) */
+#linked-users-list .list-group-item {
+    border-color: #007bff;
+    background-color: #e7f5ff;
+}
+
+/* Style for Dependents */
+#dependents-list .list-group-item {
+    border-color: #17a2b8;
+    background-color: #d1ecf1;
+}
+
+.family-section .badge {
+    min-width: 80px;
+    text-align: center;
+}
+
+.no-family-members, .no-dependents {
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    text-align: center;
+}

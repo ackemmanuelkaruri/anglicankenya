@@ -393,3 +393,45 @@ For issues and questions:
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+
+# Anglican Church of Kenya - Church Management System
+
+## Role-Based Access Control (RBAC) Matrix
+
+### Roles
+1. **Super Admin**: Full system access
+2. **National Admin**: National-level operations
+3. **Diocese Admin**: Diocese-level operations
+4. **Archdeaconry Admin**: Archdeaconry-level operations
+5. **Deanery Admin**: Deanery-level operations
+6. **Parish Admin**: Parish-level operations
+7. **Member**: Basic access
+
+### Permissions Matrix
+
+| Resource          | Super Admin | National Admin | Diocese Admin | Archdeaconry Admin | Deanery Admin | Parish Admin | Member |
+|-------------------|-------------|----------------|---------------|--------------------|---------------|--------------|--------|
+| View All Users    | ✓           | ✓              | ✓ (Diocese)   | ✓ (Archdeaconry)   | ✓ (Deanery)   | ✓ (Parish)   | ✗      |
+| Create User       | ✓           | ✓              | ✓ (Diocese)   | ✓ (Archdeaconry)   | ✓ (Deanery)   | ✓ (Parish)   | ✗      |
+| Edit User         | ✓           | ✓              | ✓ (Diocese)   | ✓ (Archdeaconry)   | ✓ (Deanery)   | ✓ (Parish)   | ✓ (Self) |
+| Delete User       | ✓           | ✓              | ✓ (Diocese)   | ✓ (Archdeaconry)   | ✗             | ✗            | ✗      |
+| Reset Password    | ✓           | ✓              | ✓ (Diocese)   | ✓ (Archdeaconry)   | ✓ (Deanery)   | ✓ (Parish)   | ✗      |
+| View Reports      | ✓           | ✓              | ✓ (Diocese)   | ✓ (Archdeaconry)   | ✓ (Deanery)   | ✓ (Parish)   | ✗      |
+| System Settings   | ✓           | ✗              | ✗             | ✗                  | ✗             | ✗            | ✗      |
+| Impersonate       | ✓           | ✗              | ✗             | ✗                  | ✗             | ✗            | ✗      |
+
+### Scope Rules
+- **Super Admin**: Can access all resources across the entire system
+- **National Admin**: Can access resources at the national level and below
+- **Diocese Admin**: Can access resources within their diocese and below
+- **Archdeaconry Admin**: Can access resources within their archdeaconry and below
+- **Deanery Admin**: Can access resources within their deanery and below
+- **Parish Admin**: Can access resources within their parish only
+- **Member**: Can only view and edit their own profile
+
+### Notes
+- "✓ (Diocese)" means the admin can only access resources within their diocese
+- "✓ (Self)" means the member can only access their own profile
+- Super Admins can impersonate other users for troubleshooting
+- All actions are logged in the activity_log table
