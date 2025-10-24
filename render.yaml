@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: anglicankenya
+    env: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
