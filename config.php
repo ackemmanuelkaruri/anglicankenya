@@ -2,13 +2,19 @@
 /**
  * ============================================
  * ENVIRONMENT CONFIGURATION MANAGER
- * Handles dev/staging/production environments
+ * Handles dev/staging/production/supabase environments
  * Safe for both CLI and Web modes
  * ============================================
  */
 
 // Detect environment (supports both web + CLI)
 function get_environment() {
+    // ✅ CHECK FOR SUPABASE ENVIRONMENT FIRST
+    // If you want to force Supabase mode, set this environment variable
+    if (getenv('USE_SUPABASE') === 'true' || file_exists(__DIR__ . '/.env.supabase')) {
+        return 'supabase';
+    }
+    
     // ✅ Detect if running from CLI (like php migrate.php)
     if (php_sapi_name() === 'cli') {
         return 'development';
@@ -66,12 +72,29 @@ load_config();
 
 // Database configuration helper
 function get_db_config() {
+    $env = get_environment();
+    
+    // ✅ Special handling for Supabase (PostgreSQL)
+    if ($env === 'supabase') {
+        return [
+            'host' => defined('DB_HOST') ? DB_HOST : 'aws-0-ap-southeast-1.pooler.supabase.com',
+            'port' => defined('DB_PORT') ? DB_PORT : '6543',
+            'name' => defined('DB_NAME') ? DB_NAME : 'postgres',
+            'user' => defined('DB_USER') ? DB_USER : 'postgres.iyztzrvjcdqotcqqekkw',
+            'pass' => defined('DB_PASS') ? DB_PASS : '',
+            'charset' => 'utf8',
+            'driver' => 'pgsql' // PostgreSQL for Supabase
+        ];
+    }
+    
+    // Default MySQL config for other environments
     return [
         'host' => defined('DB_HOST') ? DB_HOST : 'localhost',
         'name' => defined('DB_NAME') ? DB_NAME : 'anglicankenya',
         'user' => defined('DB_USER') ? DB_USER : 'root',
         'pass' => defined('DB_PASS') ? DB_PASS : '',
-        'charset' => 'utf8mb4'
+        'charset' => 'utf8mb4',
+        'driver' => 'mysql'
     ];
 }
 
@@ -86,6 +109,10 @@ function is_development() {
 
 function is_production() {
     return get_environment() === 'production';
+}
+
+function is_supabase() {
+    return get_environment() === 'supabase';
 }
 
 // Error reporting (show all errors in development only)
