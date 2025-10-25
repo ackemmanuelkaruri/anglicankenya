@@ -130,24 +130,52 @@ ini_set('display_errors', 1);
     echo "<h2>2. Loading config.php</h2>";
     echo "<div class='info-box'>";
     
-    $config_path = __DIR__ . '/config/config.php';
+    // Try multiple possible locations
+    $config_paths = [
+        __DIR__ . '/config.php',           // Root folder (same as debug.php)
+        __DIR__ . '/config/config.php',    // Config subfolder
+        __DIR__ . '/../config.php',        // One level up
+    ];
     
-    if (file_exists($config_path)) {
-        echo "<p class='success'>✅ Config file exists at: $config_path</p>";
-        
-        try {
-            require_once $config_path;
-            echo "<p class='success'>✅ Config loaded successfully</p>";
+    $config_loaded = false;
+    $config_path_used = '';
+    
+    foreach ($config_paths as $config_path) {
+        if (file_exists($config_path)) {
+            echo "<p class='success'>✅ Config file found at: $config_path</p>";
+            $config_path_used = $config_path;
             
-            if (defined('APP_ENV')) {
-                echo "<p>Environment detected: <strong>" . APP_ENV . "</strong></p>";
-                echo "<p>Is Supabase: <strong>" . (APP_ENV === 'supabase' ? 'YES' : 'NO') . "</strong></p>";
+            try {
+                require_once $config_path;
+                echo "<p class='success'>✅ Config loaded successfully</p>";
+                $config_loaded = true;
+                
+                if (defined('APP_ENV')) {
+                    echo "<p>Environment detected: <strong>" . APP_ENV . "</strong></p>";
+                    echo "<p>Is Supabase: <strong>" . (defined('APP_ENV') && APP_ENV === 'supabase' ? 'YES' : 'NO') . "</strong></p>";
+                } else {
+                    echo "<p class='warning'>⚠️ APP_ENV constant not defined</p>";
+                }
+                
+                // Show current environment function result if available
+                if (function_exists('current_environment')) {
+                    echo "<p>Current environment (function): <strong>" . current_environment() . "</strong></p>";
+                }
+                
+                break;
+            } catch (Exception $e) {
+                echo "<p class='error'>❌ Error loading config: " . htmlspecialchars($e->getMessage()) . "</p>";
             }
-        } catch (Exception $e) {
-            echo "<p class='error'>❌ Error loading config: " . htmlspecialchars($e->getMessage()) . "</p>";
         }
-    } else {
-        echo "<p class='error'>❌ Config file not found at: $config_path</p>";
+    }
+    
+    if (!$config_loaded) {
+        echo "<p class='error'>❌ Config file not found in any of these locations:</p>";
+        echo "<ul>";
+        foreach ($config_paths as $path) {
+            echo "<li>" . htmlspecialchars($path) . "</li>";
+        }
+        echo "</ul>";
     }
     
     echo "</div>";
