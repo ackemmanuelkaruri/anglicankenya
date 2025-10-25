@@ -6,6 +6,20 @@
  * ============================================
  */
 
+// Enable error logging for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 0); // Don't display errors in JSON response
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/check_credentials_errors.log');
+
+// Log all incoming requests for debugging
+file_put_contents(__DIR__ . '/check_credentials_debug.log', 
+    date('Y-m-d H:i:s') . " - Request received\n" . 
+    "Method: " . $_SERVER['REQUEST_METHOD'] . "\n" .
+    "POST data: " . print_r($_POST, true) . "\n\n", 
+    FILE_APPEND
+);
+
 // Define to include necessary files without full page load context
 define('DB_INCLUDED', true);
 
@@ -27,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $action = $_POST['action'] ?? '';
 
 // ============================================
-// VALIDATION FUNCTIONS (Copied from register.php to avoid circular dependency)
+// VALIDATION FUNCTIONS
 // ============================================
 function validate_username($username) {
     if (strlen($username) < 4 || strlen($username) > 30) {
@@ -194,6 +208,12 @@ try {
     error_log("General error in check_credentials.php: " . $e->getMessage());
     $response = ['status' => 'error', 'message' => 'An unexpected error occurred.'];
 }
+
+// Log the response for debugging
+file_put_contents(__DIR__ . '/check_credentials_debug.log', 
+    date('Y-m-d H:i:s') . " - Response sent: " . json_encode($response) . "\n\n", 
+    FILE_APPEND
+);
 
 echo json_encode($response);
 exit;
