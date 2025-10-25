@@ -15,7 +15,12 @@ try {
     // ✅ Build DSN based on driver (MySQL or PostgreSQL)
     if ($config['driver'] === 'pgsql') {
         // PostgreSQL connection for Supabase
-        $dsn = "pgsql:host={$config['host']};port={$config['port']};dbname={$config['name']};options='--client_encoding={$config['charset']}'";
+        // ✅ CRITICAL: Add sslmode=require for Supabase
+        $dsn = "pgsql:host={$config['host']};port={$config['port']};dbname={$config['name']};sslmode=require";
+        
+        // Log connection attempt
+        error_log("🔄 Connecting to PostgreSQL: {$config['host']}:{$config['port']} as {$config['user']}");
+        
     } else {
         // MySQL connection for local development
         $dsn = "mysql:host={$config['host']};dbname={$config['name']};charset={$config['charset']}";
@@ -26,6 +31,7 @@ try {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => false,
         PDO::ATTR_PERSISTENT => false, // Supabase works better without persistent connections
+        PDO::ATTR_TIMEOUT => 10, // 10 second timeout for cloud connections
     ]);
     
     // ✅ Set search_path for PostgreSQL (important for Supabase)
@@ -33,16 +39,22 @@ try {
         $pdo->exec("SET search_path TO public");
     }
     
-    // Log successful connection in development only
-    if (is_development() || is_supabase()) {
-        error_log("✅ Database connected: {$config['name']} on {$config['host']} using {$config['driver']}");
-    }
+    // ✅ Test the connection with a simple query
+    $pdo->query('SELECT 1');
+    
+    // Log successful connection
+    error_log("✅ Database connected: {$config['name']} on {$config['host']}:{$config['port']} using {$config['driver']}");
     
 } catch (PDOException $e) {
-    error_log("❌ Database connection failed: " . $e->getMessage());
+    $error_msg = $e->getMessage();
+    error_log("❌ Database connection failed: " . $error_msg);
+    error_log("   Host: " . ($config['host'] ?? 'unknown'));
+    error_log("   Port: " . ($config['port'] ?? 'unknown'));
+    error_log("   User: " . ($config['user'] ?? 'unknown'));
+    error_log("   Database: " . ($config['name'] ?? 'unknown'));
     
     if (is_development()) {
-        die("Database Connection Error: " . $e->getMessage());
+        die("Database Connection Error: " . $error_msg . "<br><br>Host: {$config['host']}:{$config['port']}<br>User: {$config['user']}<br>Database: {$config['name']}");
     } else {
         die("We're experiencing technical difficulties. Please try again later.");
     }
