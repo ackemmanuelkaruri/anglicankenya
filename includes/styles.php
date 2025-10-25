@@ -10,11 +10,8 @@ $basePath = '/';
 <link rel="stylesheet" href="<?php echo $basePath; ?>css/profile.css">
 <link rel="stylesheet" href="<?php echo $basePath; ?>css/dashboard.css">
 <link rel="stylesheet" href="<?php echo $basePath; ?>css/base.css">
-<link rel="stylesheet" href="<?php echo $basePath; ?>css/sections.css">
 <link rel="stylesheet" href="<?php echo $basePath; ?>css/tabs.css">
 <link rel="stylesheet" href="<?php echo $basePath; ?>css/forms.css">
 <link rel="stylesheet" href="<?php echo $basePath; ?>css/buttons.css">
 <link rel="stylesheet" href="<?php echo $basePath; ?>css/messages.css">
-<link rel="stylesheet" href="<?php echo $basePath; ?>css/family.css">
-<link rel="stylesheet" href="<?php echo $basePath; ?>css/minor_profile.css">
 <link rel="stylesheet" href="<?php echo $basePath; ?>css/register.css">
