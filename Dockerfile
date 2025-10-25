@@ -1,12 +1,16 @@
 # Use the official PHP Apache image
 FROM php:8.2-apache
 
-# Install system dependencies including PostgreSQL client
+# Install system dependencies including PostgreSQL client AND Composer dependencies
 RUN apt-get update && apt-get install -y \
     zip unzip git curl \
     libpng-dev libjpeg-dev libfreetype6-dev \
     libonig-dev libxml2-dev \
-    libpq-dev
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Enable required PHP extensions
 # ✅ Added pdo_pgsql and pgsql for Supabase PostgreSQL support
@@ -19,11 +23,17 @@ RUN docker-php-ext-install \
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Copy project files to the Apache root
-COPY . /var/www/html/
-
 # Set working directory
 WORKDIR /var/www/html/
+
+# Copy composer files first (for better Docker caching)
+COPY composer.json composer.lock* ./
+
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
+
+# Copy project files to the Apache root
+COPY . /var/www/html/
 
 # Set proper permissions
 RUN chown -R www-data:www-data /var/www/html \
