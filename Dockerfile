@@ -1,12 +1,20 @@
 # Use the official PHP Apache image
 FROM php:8.2-apache
 
-# Install system dependencies
+# Install system dependencies including PostgreSQL client
 RUN apt-get update && apt-get install -y \
-    zip unzip git curl libpng-dev libjpeg-dev libfreetype6-dev libonig-dev libxml2-dev
+    zip unzip git curl \
+    libpng-dev libjpeg-dev libfreetype6-dev \
+    libonig-dev libxml2-dev \
+    libpq-dev
 
 # Enable required PHP extensions
-RUN docker-php-ext-install mysqli pdo pdo_mysql mbstring exif pcntl bcmath gd
+# ✅ Added pdo_pgsql and pgsql for Supabase PostgreSQL support
+# ✅ Kept MySQL extensions for backward compatibility
+RUN docker-php-ext-install \
+    mysqli pdo pdo_mysql \
+    pdo_pgsql pgsql \
+    mbstring exif pcntl bcmath gd
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
@@ -16,6 +24,10 @@ COPY . /var/www/html/
 
 # Set working directory
 WORKDIR /var/www/html/
+
+# Set proper permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
 
 # Change Apache document root (important for Render)
 ENV APACHE_DOCUMENT_ROOT /var/www/html
@@ -27,7 +39,7 @@ RUN sed -ri -e 's!/var/www/!/var/www/html!g' /etc/apache2/apache2.conf /etc/apac
 # Expose Render port (Render expects port 10000)
 EXPOSE 10000
 
-# Set Apache to listen on Render’s required port
+# Set Apache to listen on Render's required port
 RUN sed -i 's/80/10000/g' /etc/apache2/ports.conf /etc/apache2/sites-available/000-default.conf
 
 # Start Apache
