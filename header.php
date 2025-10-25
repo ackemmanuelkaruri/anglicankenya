@@ -9,9 +9,10 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Define BASE_URL if not already defined
+// Define BASE_URL if not already defined - FIXED FOR RENDER DEPLOYMENT
 if (!defined('BASE_URL')) {
-    define('BASE_URL', '/anglicankenya/'); // Adjust for your project subfolder
+    // ✅ Use root path for Render deployment
+    define('BASE_URL', '/');
 }
 
 // Determine if user is logged in
