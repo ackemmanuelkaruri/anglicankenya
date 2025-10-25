@@ -8,7 +8,7 @@ if (isset($_COOKIE['remember_user']) && !isset($_SESSION['username'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,18 +22,21 @@ if (isset($_COOKIE['remember_user']) && !isset($_SESSION['username'])) {
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            height: 100vh;
+            background-attachment: fixed;
+            min-height: 100vh;
             margin: 0;
+            padding: 0;
         }
 
         /* Overlay for better visibility */
         .overlay {
             background-color: rgba(0, 0, 0, 0.5);
-            height: 100%;
-            width: 100%;
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
 
         .content {
@@ -42,15 +45,16 @@ if (isset($_COOKIE['remember_user']) && !isset($_SESSION['username'])) {
         }
 
         .text-white {
-            color: white;
+            color: white !important;
         }
 
         .grey-background {
-            background-color: rgba(255, 255, 255, 0.6);
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
         }
 
         .grey-background:hover {
@@ -64,6 +68,17 @@ if (isset($_COOKIE['remember_user']) && !isset($_SESSION['username'])) {
             object-fit: cover;
             border-radius: 10px;
         }
+
+        .card-title {
+            color: #333 !important;
+            font-weight: bold;
+        }
+
+        .btn-center {
+            display: block;
+            margin: 15px auto 0;
+            min-width: 150px;
+        }
     </style>
 </head>
 
@@ -73,41 +88,42 @@ if (isset($_COOKIE['remember_user']) && !isset($_SESSION['username'])) {
     <div class="content">
         <?php include 'header.php'; ?>
 
-        <div style="margin-top: 50px;"></div>
-
-        <div class="container">
-            <div class="col-md-12">
-                <div class="row">
-                    <!-- Dashboard Link (Visible only if logged in) -->
-                    <?php if (isset($_SESSION['username'])) : ?>
-                        <div class="col-md-4 mx-1 grey-background">
-                            <a href="dashboard.php">
-                                <button class="btn btn-success w-100 my-3">Go to Dashboard</button>
-                            </a>
+        <div class="container mt-5 pt-4">
+            <div class="row justify-content-center">
+                <!-- Dashboard Link (Visible only if logged in) -->
+                <?php if (isset($_SESSION['username'])) : ?>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="grey-background text-center">
+                            <h5 class="card-title mb-3">Dashboard</h5>
+                            <a href="dashboard.php" class="btn btn-primary btn-center">Go to Dashboard</a>
                         </div>
-                    <?php endif; ?>
+                    </div>
+                <?php endif; ?>
 
-                    <!-- Existing Sections -->
-                    <div class="col-md-3 mx-1 grey-background">
+                <!-- Contact Us Section -->
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="grey-background">
                         <img src="img/info.png" class="fixed-image" alt="Contact Us">
-                        <h5 class="text-center mt-2 text-white">Contact us</h5>
-                        <a href="#">
-                            <button class="btn btn-success my-3" style="margin-left:30%;">Contact us!!!</button>
-                        </a>
+                        <h5 class="text-center mt-3 card-title">Contact Us</h5>
+                        <a href="#" class="btn btn-success btn-center">Contact Us</a>
                     </div>
-                    <div class="col-md-4 mx-1 grey-background">
+                </div>
+
+                <!-- Our Church Clergy Section -->
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="grey-background">
                         <img src="img/register.jpg" class="fixed-image" alt="Our Church Clergy">
-                        <h5 class="text-center mt-2 text-white">Our Church Clergy</h5>
-                        <a href="#">
-                            <button class="btn btn-success my-3" style="margin-left:30%;">Join now!!!</button>
-                        </a>
+                        <h5 class="text-center mt-3 card-title">Our Church Clergy</h5>
+                        <a href="#" class="btn btn-success btn-center">Join Now</a>
                     </div>
-                    <div class="col-md-4 mx-1 grey-background">
+                </div>
+
+                <!-- Welcome Section -->
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="grey-background">
                         <img src="img/church.jpg" class="fixed-image" alt="Welcome to Our Church">
-                        <h5 class="text-center mt-2 text-white">Welcome to Our Church</h5>
-                        <a href="login.php">
-                            <button class="btn btn-success my-3" style="margin-left:30%;">Login Now!!!</button>
-                        </a>
+                        <h5 class="text-center mt-3 card-title">Welcome to Our Church</h5>
+                        <a href="login.php" class="btn btn-success btn-center">Login Now</a>
                     </div>
                 </div>
             </div>
