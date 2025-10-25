@@ -40,6 +40,25 @@ function get_environment() {
 // Load environment-specific configuration
 function load_config() {
     $env = get_environment();
+    
+    // ✅ PRIORITY: Check if running on Render (environment variables set)
+    if (getenv('DB_HOST') !== false) {
+        // Running on Render or similar platform - use environment variables
+        define('DB_HOST', getenv('DB_HOST'));
+        define('DB_PORT', getenv('DB_PORT') ?: '6543');
+        define('DB_NAME', getenv('DB_NAME'));
+        define('DB_USER', getenv('DB_USER'));
+        define('DB_PASS', getenv('DB_PASS'));
+        define('DB_CHARSET', getenv('DB_CHARSET') ?: 'utf8');
+        define('APP_ENV', getenv('APP_ENV') ?: 'supabase');
+        define('SUPABASE_URL', getenv('SUPABASE_URL') ?: '');
+        define('SUPABASE_ANON_KEY', getenv('SUPABASE_ANON_KEY') ?: '');
+        
+        error_log("✅ Loaded config from environment variables");
+        return;
+    }
+    
+    // Otherwise, load from .env file (local development)
     $config_file = __DIR__ . "/.env.{$env}";
     
     if (!file_exists($config_file)) {
