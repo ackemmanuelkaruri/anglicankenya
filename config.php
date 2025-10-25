@@ -10,12 +10,16 @@
 // Detect environment (supports both web + CLI)
 function get_environment() {
     // ✅ CHECK FOR SUPABASE ENVIRONMENT FIRST
-    // If you want to force Supabase mode, set this environment variable
     if (getenv('USE_SUPABASE') === 'true' || file_exists(__DIR__ . '/.env.supabase')) {
         return 'supabase';
     }
     
-    // ✅ Detect if running from CLI (like php migrate.php)
+    // Check if we have Supabase-style env vars
+    if (getenv('DB_HOST') && strpos(getenv('DB_HOST'), 'supabase.co') !== false) {
+        return 'supabase';
+    }
+    
+    // ✅ Detect if running from CLI
     if (php_sapi_name() === 'cli') {
         return 'development';
     }
@@ -43,18 +47,45 @@ function load_config() {
     
     // ✅ PRIORITY: Check if running on Render (environment variables set)
     if (getenv('DB_HOST') !== false) {
-        // Running on Render or similar platform - use environment variables
-        define('DB_HOST', getenv('DB_HOST'));
-        define('DB_PORT', getenv('DB_PORT') ?: '6543');
-        define('DB_NAME', getenv('DB_NAME'));
-        define('DB_USER', getenv('DB_USER'));
+        $db_host = getenv('DB_HOST');
+        $db_port = getenv('DB_PORT') ?: '6543';
+        
+        // ✅ FIX: Adjust username format based on port
+        $db_user = getenv('DB_USER');
+        
+        // If using connection pooler (port 6543) and username doesn't have project reference
+        if ($db_port == '6543' && strpos($db_user, '.') === false) {
+            // Extract project reference from hostname
+            // db.iyztzrvjcdqotcqqekkw.supabase.co -> iyztzrvjcdqotcqqekkw
+            if (preg_match('/db\.([^.]+)\.supabase\.co/', $db_host, $matches)) {
+                $project_ref = $matches[1];
+                $db_user = "postgres.{$project_ref}";
+                error_log("✅ Adjusted username for connection pooler: {$db_user}");
+            }
+        }
+        
+        // ✅ Try alternative hosts if primary fails
+        define('DB_HOST_PRIMARY', $db_host);
+        define('DB_HOST_POOLER', preg_replace('/^db\./', 'aws-0-ap-southeast-1.pooler.', $db_host));
+        
+        define('DB_HOST', $db_host);
+        define('DB_PORT', $db_port);
+        define('DB_NAME', getenv('DB_NAME') ?: 'postgres');
+        define('DB_USER', $db_user);
         define('DB_PASS', getenv('DB_PASS'));
         define('DB_CHARSET', getenv('DB_CHARSET') ?: 'utf8');
         define('APP_ENV', getenv('APP_ENV') ?: 'supabase');
         define('SUPABASE_URL', getenv('SUPABASE_URL') ?: '');
         define('SUPABASE_ANON_KEY', getenv('SUPABASE_ANON_KEY') ?: '');
         
+        // ✅ SSL Mode for Supabase
+        define('DB_SSL_MODE', 'require');
+        
         error_log("✅ Loaded config from environment variables");
+        error_log("   Host: " . DB_HOST);
+        error_log("   Port: " . DB_PORT);
+        error_log("   User: " . DB_USER);
+        error_log("   Database: " . DB_NAME);
         return;
     }
     
@@ -89,20 +120,29 @@ function load_config() {
 // Load the configuration
 load_config();
 
-// Database configuration helper
+// Database configuration helper with fallback logic
 function get_db_config() {
     $env = get_environment();
     
     // ✅ Special handling for Supabase (PostgreSQL)
     if ($env === 'supabase') {
         return [
-            'host' => defined('DB_HOST') ? DB_HOST : 'aws-0-ap-southeast-1.pooler.supabase.com',
+            'host' => defined('DB_HOST') ? DB_HOST : 'db.iyztzrvjcdqotcqqekkw.supabase.co',
             'port' => defined('DB_PORT') ? DB_PORT : '6543',
             'name' => defined('DB_NAME') ? DB_NAME : 'postgres',
             'user' => defined('DB_USER') ? DB_USER : 'postgres.iyztzrvjcdqotcqqekkw',
             'pass' => defined('DB_PASS') ? DB_PASS : '',
             'charset' => 'utf8',
-            'driver' => 'pgsql' // PostgreSQL for Supabase
+            'driver' => 'pgsql',
+            'ssl_mode' => defined('DB_SSL_MODE') ? DB_SSL_MODE : 'require',
+            // ✅ Connection options for reliability
+            'options' => [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+                PDO::ATTR_TIMEOUT => 15, // Longer timeout for cloud connections
+                PDO::ATTR_PERSISTENT => false
+            ]
         ];
     }
     
@@ -113,8 +153,86 @@ function get_db_config() {
         'user' => defined('DB_USER') ? DB_USER : 'root',
         'pass' => defined('DB_PASS') ? DB_PASS : '',
         'charset' => 'utf8mb4',
-        'driver' => 'mysql'
+        'driver' => 'mysql',
+        'options' => [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false
+        ]
     ];
+}
+
+// ✅ Create PDO connection with automatic fallback
+function get_pdo_connection() {
+    $config = get_db_config();
+    
+    if ($config['driver'] === 'pgsql') {
+        // Try connection with multiple strategies
+        $connection_attempts = [
+            // Attempt 1: Connection Pooler (IPv4 preferred)
+            [
+                'host' => $config['host'],
+                'port' => '6543',
+                'user' => $config['user']
+            ],
+            // Attempt 2: Direct connection
+            [
+                'host' => $config['host'],
+                'port' => '5432',
+                'user' => str_replace('.iyztzrvjcdqotcqqekkw', '', $config['user']) // Remove project ref for direct
+            ],
+            // Attempt 3: Alternative pooler endpoint
+            [
+                'host' => 'aws-0-ap-southeast-1.pooler.supabase.com',
+                'port' => '6543',
+                'user' => $config['user']
+            ]
+        ];
+        
+        $last_error = null;
+        
+        foreach ($connection_attempts as $attempt) {
+            try {
+                $dsn = sprintf(
+                    "pgsql:host=%s;port=%s;dbname=%s;sslmode=%s",
+                    $attempt['host'],
+                    $attempt['port'],
+                    $config['name'],
+                    $config['ssl_mode']
+                );
+                
+                error_log("🔄 Attempting connection: {$attempt['host']}:{$attempt['port']} as {$attempt['user']}");
+                
+                $pdo = new PDO($dsn, $attempt['user'], $config['pass'], $config['options']);
+                
+                // Test the connection
+                $pdo->query('SELECT 1');
+                
+                error_log("✅ Database connected successfully via {$attempt['host']}:{$attempt['port']}");
+                return $pdo;
+                
+            } catch (PDOException $e) {
+                $last_error = $e;
+                error_log("❌ Connection attempt failed: " . $e->getMessage());
+                continue;
+            }
+        }
+        
+        // All attempts failed
+        error_log("❌ All database connection attempts failed. Last error: " . $last_error->getMessage());
+        throw new Exception("Unable to connect to database: " . $last_error->getMessage());
+        
+    } else {
+        // MySQL connection (standard)
+        $dsn = sprintf(
+            "mysql:host=%s;dbname=%s;charset=%s",
+            $config['host'],
+            $config['name'],
+            $config['charset']
+        );
+        
+        return new PDO($dsn, $config['user'], $config['pass'], $config['options']);
+    }
 }
 
 // Environment check helpers
