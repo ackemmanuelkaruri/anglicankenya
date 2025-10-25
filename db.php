@@ -2,32 +2,44 @@
 /**
  * ============================================
  * DATABASE CONNECTION
- * Now uses environment-based configuration
+ * Now supports both MySQL and PostgreSQL (Supabase)
  * ============================================
  */
 
-// ✅ Define DB_INCLUDED constant to allow security.php to load
 // Load environment configuration
 require_once __DIR__ . '/config.php';
 
 try {
     $config = get_db_config();
     
-    $dsn = "mysql:host={$config['host']};dbname={$config['name']};charset={$config['charset']}";
+    // ✅ Build DSN based on driver (MySQL or PostgreSQL)
+    if ($config['driver'] === 'pgsql') {
+        // PostgreSQL connection for Supabase
+        $dsn = "pgsql:host={$config['host']};port={$config['port']};dbname={$config['name']};options='--client_encoding={$config['charset']}'";
+    } else {
+        // MySQL connection for local development
+        $dsn = "mysql:host={$config['host']};dbname={$config['name']};charset={$config['charset']}";
+    }
     
     $pdo = new PDO($dsn, $config['user'], $config['pass'], [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => false,
+        PDO::ATTR_PERSISTENT => false, // Supabase works better without persistent connections
     ]);
     
+    // ✅ Set search_path for PostgreSQL (important for Supabase)
+    if ($config['driver'] === 'pgsql') {
+        $pdo->exec("SET search_path TO public");
+    }
+    
     // Log successful connection in development only
-    if (is_development()) {
-        error_log("Database connected: {$config['name']} on {$config['host']}");
+    if (is_development() || is_supabase()) {
+        error_log("✅ Database connected: {$config['name']} on {$config['host']} using {$config['driver']}");
     }
     
 } catch (PDOException $e) {
-    error_log("Database connection failed: " . $e->getMessage());
+    error_log("❌ Database connection failed: " . $e->getMessage());
     
     if (is_development()) {
         die("Database Connection Error: " . $e->getMessage());
