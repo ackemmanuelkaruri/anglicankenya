@@ -16,7 +16,6 @@ $basePath = '/';
 <script src="<?php echo $basePath; ?>js/tab-navigation.js"></script>
 <!-- Section & Role Handling -->
 <script src="<?php echo $basePath; ?>js/section-save.js"></script>
-<script src="<?php echo $basePath; ?>js/baptism-confirmation.js"></script>
 <script src="<?php echo $basePath; ?>js/main.js"></script>
 <script src="<?php echo $basePath; ?>js/clergy-handlers.js"></script>
 <script src="<?php echo $basePath; ?>js/employment-roles.js"></script>
@@ -25,7 +24,6 @@ $basePath = '/';
 <script src="<?php echo $basePath; ?>js/service-handlers.js"></script>
 <script src="<?php echo $basePath; ?>js/countdown.js"></script>
 <!-- Family Section -->
-<script src="<?php echo $basePath; ?>js/family.js"></script>
 <!-- Page-Specific -->
 <script src="<?php echo $basePath; ?>js/personal-section.js"></script>
 <script src="<?php echo $basePath; ?>js/leadership-init.js"></script>
