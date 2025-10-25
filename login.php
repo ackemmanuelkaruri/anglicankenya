@@ -226,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="css/login.css" rel="stylesheet">
 
     <!-- PWA Manifest -->
-    <link rel="manifest" href="/anglicankenya/manifest.json">
+    <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#4A90E2">
 </head>
 <body>
