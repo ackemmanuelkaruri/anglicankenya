@@ -2,6 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+// Move use statements to the top
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 echo "<h2>Email Configuration Test</h2>";
 
 // Check environment variables
@@ -32,9 +36,6 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
         
         // Direct PHPMailer test with error output
         echo "<h3>3. Direct PHPMailer Test (with debug):</h3>";
-        
-        use PHPMailer\PHPMailer\PHPMailer;
-        use PHPMailer\PHPMailer\Exception;
         
         $mail = new PHPMailer(true);
         
