@@ -30,8 +30,8 @@ WORKDIR /var/www/html/
 COPY composer.json composer.lock* ./
 
 # Install PHP dependencies
-# FIX: Execute composer with unlimited memory to avoid exit code 4 error on small servers (like Render's free tier)
-RUN /bin/sh -c "php -d memory_limit=-1 $(which composer) install --no-dev --optimize-autoloader --no-interaction --no-progress"
+# FIX: Set the Composer environment variable to override memory limit and prevent exit code 4
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
 # Copy project files to the Apache root
 COPY . /var/www/html/
