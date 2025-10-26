@@ -8,8 +8,11 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+define('DB_INCLUDED', true);
+
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/includes/security.php';
+require_once __DIR__ . '/includes/email_helper.php';
 
 // Create logs directory if not exists
 $log_dir = __DIR__ . '/logs';
