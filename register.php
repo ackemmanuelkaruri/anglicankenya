@@ -37,7 +37,7 @@ $phone = '';
 $gender = '';
 $date_of_birth = '';
 
-// RATE LIMITING FUNCTION
+// RATE LIMITING FUNCTION - FIXED FOR POSTGRESQL
 function check_registration_rate_limit($ip_address, $email = null) {
     global $pdo;
     
@@ -46,7 +46,7 @@ function check_registration_rate_limit($ip_address, $email = null) {
             SELECT COUNT(*) as attempt_count 
             FROM registration_attempts 
             WHERE ip_address = ? 
-            AND attempted_at > DATE_SUB(NOW(), INTERVAL 1 HOUR)
+            AND attempted_at > NOW() - INTERVAL '1 hour'
         ");
         $stmt->execute([$ip_address]);
         $result = $stmt->fetch();
@@ -60,7 +60,7 @@ function check_registration_rate_limit($ip_address, $email = null) {
                 SELECT COUNT(*) as attempt_count 
                 FROM registration_attempts 
                 WHERE email = ? 
-                AND attempted_at > DATE_SUB(NOW(), INTERVAL 1 HOUR)
+                AND attempted_at > NOW() - INTERVAL '1 hour'
             ");
             $stmt->execute([$email]);
             $result = $stmt->fetch();
@@ -87,7 +87,7 @@ function log_registration_attempt($ip_address, $email, $username, $success) {
             (ip_address, email, username, success, attempted_at) 
             VALUES (?, ?, ?, ?, NOW())
         ");
-        $stmt->execute([$ip_address, $email, $username, $success ? 1 : 0]);
+        $stmt->execute([$ip_address, $email, $username, $success ? TRUE : FALSE]);
     } catch (PDOException $e) {
         error_log("Failed to log registration attempt: " . $e->getMessage());
     }
@@ -450,7 +450,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             // Set province_id to 1 (Anglican Church of Kenya)
                             $province_id = 1;
                             
-                            // Insert user
+                            // Insert user - FIXED FOR POSTGRESQL
                             debug_log("Inserting user record...");
                             debug_log("Values - Province: {$province_id}, Org: {$org_id}, Diocese: {$diocese_id}, Arch: {$archdeaconry_id}, Dean: {$deanery_id}, Parish: {$parish_id}");
                             
@@ -476,7 +476,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     email_verified, 
                                     email_token_expires_at, 
                                     created_at
-                                ) VALUES (?, ?, ?, ?, ?, ?, 'member', ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?, 0, ?, NOW())
+                                ) VALUES (?, ?, ?, ?, ?, ?, 'member', ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?, FALSE, ?, NOW())
                             ");
 
                             $token_expiry = (new DateTime())->modify('+24 hours')->format('Y-m-d H:i:s');
@@ -662,123 +662,4 @@ $form_start_time = time();
                             <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
                             <input type="tel" class="form-control" id="phone" name="phone" 
                                 value="<?php echo htmlspecialchars($phone, ENT_QUOTES, 'UTF-8'); ?>" 
-                                placeholder="0712345678" pattern="(\+254|254|0)?[71]\d{8}" required>
-                            <small class="text-muted">Format: 0712345678 or +254712345678</small>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="gender" class="form-label">Gender <span class="text-danger">*</span></label>
-                            <select class="form-select" id="gender" name="gender" required>
-                                <option value="">-- Select --</option>
-                                <option value="Male" <?php echo ($gender === 'Male') ? 'selected' : ''; ?>>Male</option>
-                                <option value="Female" <?php echo ($gender === 'Female') ? 'selected' : ''; ?>>Female</option>
-                                <option value="Other" <?php echo ($gender === 'Other') ? 'selected' : ''; ?>>Other</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="date_of_birth" class="form-label">Date of Birth <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" 
-                               value="<?php echo htmlspecialchars($date_of_birth, ENT_QUOTES, 'UTF-8'); ?>" 
-                               required>
-                        <small class="text-muted">You must be at least 13 years old to register.</small>
-                    </div>
-                </div>
-
-                <!-- Account Credentials -->
-                <div class="form-section">
-                    <h5>Account Credentials</h5>
-                    <div class="mb-3 position-relative">
-                        <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="username" name="username" 
-                            value="<?php echo htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); ?>" 
-                            minlength="4" maxlength="30" pattern="[a-zA-Z0-9_\-]+" required>
-                        <span class="status-icon" id="usernameStatus"></span>
-                        <small class="text-muted" id="usernameHelp">4-30 characters: letters, numbers, underscore, or dash only</small>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" id="password" name="password" 
-                               minlength="8" maxlength="128" required>
-                        
-                        <div class="password-strength-bar mt-2 mb-2">
-                            <div id="passwordStrengthBar" class="progress-bar"></div>
-                        </div>
-                        
-                        <div class="password-criteria small text-muted" id="passwordCriteria">
-                            <strong class="d-block mb-1">Password must contain:</strong>
-                            <div class="row g-2">
-                                <div class="col-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li id="p-length" class="text-danger">
-                                            <span class="badge bg-danger rounded-pill me-1">
-                                                <i class="fas fa-times fa-fw"></i>
-                                            </span>
-                                            8+ characters
-                                        </li>
-                                        <li id="p-uppercase" class="text-danger">
-                                            <span class="badge bg-danger rounded-pill me-1">
-                                                <i class="fas fa-times fa-fw"></i>
-                                            </span>
-                                            Uppercase
-                                        </li>
-                                        <li id="p-lowercase" class="text-danger">
-                                            <span class="badge bg-danger rounded-pill me-1">
-                                                <i class="fas fa-times fa-fw"></i>
-                                            </span>
-                                            Lowercase
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li id="p-number" class="text-danger">
-                                            <span class="badge bg-danger rounded-pill me-1">
-                                                <i class="fas fa-times fa-fw"></i>
-                                            </span>
-                                            A number
-                                        </li>
-                                        <li id="p-special" class="text-danger">
-                                            <span class="badge bg-danger rounded-pill me-1">
-                                                <i class="fas fa-times fa-fw"></i>
-                                            </span>
-                                            Special character
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="confirm_password" class="form-label">Confirm Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
-                        <small class="text-danger d-none" id="passwordMismatch">Passwords do not match</small>
-                    </div>
-                </div>
-
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="terms" required>
-                    <label class="form-check-label" for="terms">
-                        I agree to the <a href="#" target="_blank">Terms & Conditions</a>
-                    </label>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-register w-100">
-                    Create Account
-                </button>
-            </form>
-
-            <div class="text-center mt-4">
-                <p class="mb-0">
-                    Already have an account? 
-                    <a href="login.php" class="text-decoration-none fw-bold">Sign In</a>
-                </p>
-            </div>
-        <?php endif; ?>
-    </div>
-
-    <<script src="js/register.js"></script>
-   </body>
-</html>
+                                placeholder="0712345678" pattern="(\+254
