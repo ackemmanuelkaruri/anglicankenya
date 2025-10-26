@@ -1,13 +1,14 @@
 <?php
 /**
  * ============================================
- * EMAIL HELPER - RENDER + BREVO VERSION
- * Using PHPMailer with Environment Variables
+ * EMAIL HELPER - Render + Brevo API Version
  * ============================================
  */
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+use Brevo\Client\Api\TransactionalEmailsApi;
+use Brevo\Client\Configuration;
+use Brevo\Client\Model\SendSmtpEmail;
+use GuzzleHttp\Client;
 
 if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
     require_once __DIR__ . '/../vendor/autoload.php';
@@ -29,106 +30,97 @@ function getEnvVar($key, $default = '') {
 }
 
 /**
- * Get email configuration (Brevo)
+ * Get email configuration
  */
 function getEmailConfig() {
     $config = [
-        'host' => getEnvVar('SMTP_HOST', 'smtp-relay.brevo.com'),
-        'username' => getEnvVar('SMTP_USERNAME', 'ackemmanuelchurchkaruri@gmail.com'),
-        'password' => getEnvVar('SMTP_PASSWORD', 'YOUR_BREVO_API_KEY'),
-        'port' => getEnvVar('SMTP_PORT', '587'),
         'from_email' => getEnvVar('SMTP_FROM_EMAIL', 'ackemmanuelchurchkaruri@gmail.com'),
-        'from_name' => getEnvVar('SMTP_FROM_NAME', 'ACK Emmanuel Church Karuri'),
-        'app_url' => getEnvVar('APP_URL', 
-            (isset($_SERVER['HTTP_HOST']) ? 
-                (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] : 
-                'http://localhost'))
+        'from_name'  => getEnvVar('SMTP_FROM_NAME', 'ACK Emmanuel Church Karuri'),
+        'app_url'    => getEnvVar('APP_URL', 
+            (isset($_SERVER['HTTP_HOST']) ?
+                ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'])
+                : 'http://localhost'))
     ];
-
-    error_log("📨 Email Config Loaded - Host: {$config['host']}, User: {$config['username']}, Port: {$config['port']}, URL: {$config['app_url']}");
+    error_log("📨 Email Config Loaded - From: {$config['from_email']}, URL: {$config['app_url']}");
     return $config;
 }
 
 /**
  * ============================================
- * SEND VERIFICATION EMAIL
+ * SEND VERIFICATION EMAIL (Brevo API)
  * ============================================
  */
 function sendVerificationEmail($email, $first_name, $verification_token) {
     $config = getEmailConfig();
-    $mail = new PHPMailer(true);
-    
+    $apiKey = getEnvVar('BREVO_API_KEY');
+
+    if (!$apiKey) {
+        error_log("❌ Missing BREVO_API_KEY in environment variables.");
+        return false;
+    }
+
+    $configuration = Configuration::getDefaultConfiguration()->setApiKey('api-key', $apiKey);
+    $apiInstance   = new TransactionalEmailsApi(new Client(), $configuration);
+
+    $verification_link = rtrim($config['app_url'], '/') . '/verify_email.php?token=' . urlencode($verification_token);
+
+    $emailData = new SendSmtpEmail([
+        'subject' => 'Verify Your Email Address - ACK Emmanuel Church Karuri',
+        'sender'  => [
+            'name'  => $config['from_name'],
+            'email' => $config['from_email']
+        ],
+        'to' => [[ 'email' => $email, 'name' => $first_name ]],
+        'htmlContent' => getVerificationEmailTemplate($first_name, $verification_link),
+        'textContent' => getVerificationEmailPlainText($first_name, $verification_link)
+    ]);
+
     try {
-        $mail->isSMTP();
-        $mail->Host       = $config['host'];
-        $mail->SMTPAuth   = true;
-        $mail->Username   = $config['username'];
-        $mail->Password   = $config['password'];
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = (int)$config['port'];
-        $mail->Timeout    = 30;
-
-        $mail->setFrom($config['from_email'], $config['from_name']);
-        $mail->addAddress($email, $first_name);
-        $mail->addReplyTo($config['from_email'], 'ACK Support');
-
-        $mail->isHTML(true);
-        $mail->CharSet = 'UTF-8';
-        $mail->Subject = 'Verify Your Email Address - ACK Emmanuel Church Karuri';
-
-        $verification_link = rtrim($config['app_url'], '/') . '/verify_email.php?token=' . urlencode($verification_token);
-        $mail->Body    = getVerificationEmailTemplate($first_name, $verification_link);
-        $mail->AltBody = getVerificationEmailPlainText($first_name, $verification_link);
-
-        $mail->send();
-        error_log("✅ Verification email sent successfully to: {$email}");
+        $apiInstance->sendTransacEmail($emailData);
+        error_log("✅ Verification email sent successfully to {$email}");
         return true;
-
     } catch (Exception $e) {
-        error_log("❌ Email send failed for {$email}: {$mail->ErrorInfo}");
-        error_log("Exception: " . $e->getMessage());
+        error_log("❌ Verification email failed for {$email}: " . $e->getMessage());
         return false;
     }
 }
 
 /**
  * ============================================
- * SEND PASSWORD RESET EMAIL
+ * SEND PASSWORD RESET EMAIL (Brevo API)
  * ============================================
  */
 function sendPasswordResetEmail($email, $first_name, $reset_token) {
     $config = getEmailConfig();
-    $mail = new PHPMailer(true);
-    
+    $apiKey = getEnvVar('BREVO_API_KEY');
+
+    if (!$apiKey) {
+        error_log("❌ Missing BREVO_API_KEY in environment variables.");
+        return false;
+    }
+
+    $configuration = Configuration::getDefaultConfiguration()->setApiKey('api-key', $apiKey);
+    $apiInstance   = new TransactionalEmailsApi(new Client(), $configuration);
+
+    $reset_link = rtrim($config['app_url'], '/') . '/reset_password_confirm.php?token=' . urlencode($reset_token);
+
+    $emailData = new SendSmtpEmail([
+        'subject' => 'Password Reset Request - ACK Emmanuel Church Karuri',
+        'sender'  => [
+            'name'  => $config['from_name'],
+            'email' => $config['from_email']
+        ],
+        'to' => [[ 'email' => $email, 'name' => $first_name ]],
+        'htmlContent' => getPasswordResetEmailTemplate($first_name, $reset_link),
+        'textContent' => getPasswordResetEmailPlainText($first_name, $reset_link)
+    ]);
+
     try {
-        $mail->isSMTP();
-        $mail->Host       = $config['host'];
-        $mail->SMTPAuth   = true;
-        $mail->Username   = $config['username'];
-        $mail->Password   = $config['password'];
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = (int)$config['port'];
-        $mail->Timeout    = 30;
-
-        $mail->setFrom($config['from_email'], $config['from_name']);
-        $mail->addAddress($email, $first_name);
-        $mail->addReplyTo($config['from_email'], 'ACK Support');
-
-        $mail->isHTML(true);
-        $mail->CharSet = 'UTF-8';
-        $mail->Subject = 'Password Reset Request - ACK Emmanuel Church Karuri';
-
-        $reset_link = rtrim($config['app_url'], '/') . '/reset_password_confirm.php?token=' . urlencode($reset_token);
-        $mail->Body    = getPasswordResetEmailTemplate($first_name, $reset_link);
-        $mail->AltBody = getPasswordResetEmailPlainText($first_name, $reset_link);
-
-        $mail->send();
-        error_log("✅ Password reset email sent successfully to: {$email}");
+        $apiInstance->sendTransacEmail($emailData);
+        error_log("✅ Password reset email sent successfully to {$email}");
         return true;
-
     } catch (Exception $e) {
-        error_log("❌ Password reset email failed for {$email}: {$mail->ErrorInfo}");
-        error_log("Exception: " . $e->getMessage());
+        error_log("❌ Password reset email failed for {$email}: " . $e->getMessage());
         return false;
     }
 }
