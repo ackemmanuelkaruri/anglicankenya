@@ -31,7 +31,8 @@ COPY composer.json composer.lock* ./
 
 # Install PHP dependencies
 # FIX: Set the Composer environment variable to override memory limit and prevent exit code 4
-RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --optimize-autoloader --no-interaction --no-progress
+RUN COMPOSER_MEMORY_LIMIT=-1 composer update --no-dev --optimize-autoloader --no-interaction --no-progress
+
 
 # Copy project files to the Apache root
 COPY . /var/www/html/
