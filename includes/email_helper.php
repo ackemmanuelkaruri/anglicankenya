@@ -1,29 +1,53 @@
 <?php
 /**
  * ============================================
- * EMAIL HELPER (FULL VERSION)
- * Using PHPMailer for Verification & Reset
+ * EMAIL HELPER - RENDER COMPATIBLE VERSION
+ * Using PHPMailer with Environment Variables
  * ============================================
  */
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+// Try to load autoload from different possible locations
+if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    require_once __DIR__ . '/../vendor/autoload.php';
+} elseif (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require_once __DIR__ . '/vendor/autoload.php';
+} else {
+    error_log("CRITICAL: Composer autoload not found!");
+}
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
-// Load environment variables - try .env.supabase first, then .env
+// Load environment variables from multiple possible locations
 try {
-    if (file_exists(__DIR__ . '/../.env.supabase')) {
-        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..', '.env.supabase');
-        $dotenv->load();
-    } elseif (file_exists(__DIR__ . '/../.env')) {
-        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-        $dotenv->load();
+    if (class_exists('Dotenv\Dotenv')) {
+        if (file_exists(__DIR__ . '/../.env.supabase')) {
+            $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..', '.env.supabase');
+            $dotenv->safeLoad();
+        } elseif (file_exists(__DIR__ . '/../.env')) {
+            $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+            $dotenv->safeLoad();
+        }
     }
 } catch (Exception $e) {
-    // Ignore error - environment variables might already be loaded
+    error_log("Dotenv load error: " . $e->getMessage());
+}
+
+/**
+ * Get email configuration from environment or fallback
+ */
+function getEmailConfig() {
+    return [
+        'host' => getenv('SMTP_HOST') ?: ($_ENV['SMTP_HOST'] ?? 'smtp.gmail.com'),
+        'username' => getenv('SMTP_USERNAME') ?: ($_ENV['SMTP_USERNAME'] ?? 'beniquecreations@gmail.com'),
+        'password' => getenv('SMTP_PASSWORD') ?: ($_ENV['SMTP_PASSWORD'] ?? 'ikspurkhihjaabvs'),
+        'port' => getenv('SMTP_PORT') ?: ($_ENV['SMTP_PORT'] ?? 587),
+        'from_email' => getenv('SMTP_FROM_EMAIL') ?: ($_ENV['SMTP_FROM_EMAIL'] ?? 'noreply@anglicankenya.local'),
+        'from_name' => getenv('SMTP_FROM_NAME') ?: ($_ENV['SMTP_FROM_NAME'] ?? 'Church Management System'),
+        'app_url' => getenv('APP_URL') ?: ($_ENV['APP_URL'] ?? (isset($_SERVER['HTTP_HOST']) ? 
+            (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] : 
+            'http://localhost'))
+    ];
 }
 
 /**
@@ -31,57 +55,57 @@ try {
  * SEND VERIFICATION EMAIL
  * ============================================
  */
-
 function sendVerificationEmail($email, $first_name, $verification_token) {
-    // Add debug output
-    //echo "Debug Info:<br>";
-    //echo "Email: " . htmlspecialchars($email) . "<br>";
-    //echo "Name: " . htmlspecialchars($first_name) . "<br>";
-   // echo "Token: " . htmlspecialchars($verification_token) . "<br><br>";
-    
+    $config = getEmailConfig();
     $mail = new PHPMailer(true);
     
-    // Enable verbose debug output
-    //$mail->SMTPDebug = 3;
-    //$mail->Debugoutput = function($str, $level) {
-    //    echo $str . "<br>";
-   // };
-    
     try {
-        // --- Server Config ---
+        // Server settings
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
+        $mail->Host       = $config['host'];
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'beniquecreations@gmail.com';       // ✓ Your Gmail
-        $mail->Password   = 'ikspurkhihjaabvs';                 // ✓ Your App Password
+        $mail->Username   = $config['username'];
+        $mail->Password   = $config['password'];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $config['port'];
+        
+        // Timeout settings for slow connections
+        $mail->Timeout = 30;
+        $mail->SMTPKeepAlive = true;
 
-        // --- Sender Info ---
-        $mail->setFrom('noreply@anglicankenya.local', 'Church Management System');
+        // Sender/Recipient
+        $mail->setFrom($config['from_email'], $config['from_name']);
         $mail->addAddress($email, $first_name);
-        $mail->addReplyTo('support@anglicankenya.local', 'Support Team');
+        $mail->addReplyTo($config['from_email'], 'Support Team');
 
-        // --- Email Content ---
+        // Content
         $mail->isHTML(true);
         $mail->CharSet = 'UTF-8';
         $mail->Subject = 'Verify Your Email Address - Church Management System';
 
-        // Build verification link dynamically
-        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-        $host = $_SERVER['HTTP_HOST'];
-        $verification_link = $protocol . '://' . $host . '/anglicankenya/verify_email.php?token=' . urlencode($verification_token);
+        // Build verification link
+        $verification_link = rtrim($config['app_url'], '/') . '/verify_email.php?token=' . urlencode($verification_token);
 
         $mail->Body    = getVerificationEmailTemplate($first_name, $verification_link);
         $mail->AltBody = getVerificationEmailPlainText($first_name, $verification_link);
 
-        $mail->send();
+        $result = $mail->send();
+        
+        // Log success
+        error_log("Verification email sent successfully to: {$email}");
+        
         return true;
 
     } catch (Exception $e) {
-        error_log("Email sending failed: {$mail->ErrorInfo}");
-        echo "Error: " . $mail->ErrorInfo . "<br>";
-        echo "Exception: " . $e->getMessage() . "<br>";
+        // Detailed error logging
+        error_log("=== EMAIL SEND FAILURE ===");
+        error_log("To: {$email}");
+        error_log("Error: {$mail->ErrorInfo}");
+        error_log("Exception: " . $e->getMessage());
+        error_log("Config Host: {$config['host']}");
+        error_log("Config Username: {$config['username']}");
+        error_log("=========================");
+        
         return false;
     }
 }
@@ -92,48 +116,53 @@ function sendVerificationEmail($email, $first_name, $verification_token) {
  * ============================================
  */
 function sendPasswordResetEmail($email, $first_name, $reset_token) {
+    $config = getEmailConfig();
     $mail = new PHPMailer(true);
     
     try {
-        // --- Server Config ---
+        // Server settings
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
+        $mail->Host       = $config['host'];
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'beniquecreations@gmail.com';       // 🔹 Replace with your Gmail
-        $mail->Password   = 'ikspurkhihjaabvs';          // 🔹 Gmail App Password
+        $mail->Username   = $config['username'];
+        $mail->Password   = $config['password'];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $mail->Port       = $config['port'];
+        
+        $mail->Timeout = 30;
 
-        // --- Sender Info ---
-        $mail->setFrom('noreply@anglicankenya.local', 'Church Management System');
+        // Sender/Recipient
+        $mail->setFrom($config['from_email'], $config['from_name']);
         $mail->addAddress($email, $first_name);
-        $mail->addReplyTo('support@anglicankenya.local', 'Support Team');
+        $mail->addReplyTo($config['from_email'], 'Support Team');
 
-        // --- Email Content ---
+        // Content
         $mail->isHTML(true);
         $mail->CharSet = 'UTF-8';
         $mail->Subject = 'Password Reset Request - Church Management System';
 
-        // Build reset link dynamically
-        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-        $host = $_SERVER['HTTP_HOST'];
-        $reset_link = $protocol . '://' . $host . '/anglicankenya/reset_password_confirm.php?token=' . urlencode($reset_token);
+        // Build reset link
+        $reset_link = rtrim($config['app_url'], '/') . '/reset_password_confirm.php?token=' . urlencode($reset_token);
 
         $mail->Body    = getPasswordResetEmailTemplate($first_name, $reset_link);
         $mail->AltBody = getPasswordResetEmailPlainText($first_name, $reset_link);
 
         $mail->send();
+        
+        error_log("Password reset email sent successfully to: {$email}");
+        
         return true;
 
     } catch (Exception $e) {
         error_log("Password reset email failed: {$mail->ErrorInfo}");
+        error_log("Exception: " . $e->getMessage());
         return false;
     }
 }
 
 /**
  * ============================================
- * VERIFICATION EMAIL TEMPLATE (HTML)
+ * EMAIL TEMPLATES
  * ============================================
  */
 function getVerificationEmailTemplate($first_name, $verification_link) {
@@ -160,15 +189,14 @@ function getVerificationEmailTemplate($first_name, $verification_link) {
                     <p style='text-align:center; margin:30px 0;'>
                         <a href='" . htmlspecialchars($verification_link) . "' style='background:#667eea; color:#fff; text-decoration:none; padding:14px 30px; border-radius:6px; font-weight:bold; display:inline-block;'>Verify Email</a>
                     </p>
-                    <p>If the button above doesn't work, copy and paste the following link in your browser:</p>
+                    <p>If the button doesn't work, copy and paste this link:</p>
                     <p style='background:#f1f1f1; padding:10px; border-radius:4px; word-break:break-all; font-size:12px;'>" . htmlspecialchars($verification_link) . "</p>
-                    <p><strong>This link will expire in 24 hours.</strong></p>
-                    <p>If you didn't request this, please ignore this email.</p>
+                    <p><strong>This link expires in 24 hours.</strong></p>
                 </td>
             </tr>
             <tr>
                 <td style='background:#f8f9fa; text-align:center; padding:20px; color:#777; font-size:13px;'>
-                    &copy; " . date('Y') . " Anglican Church of Kenya. All rights reserved.
+                    &copy; " . date('Y') . " Anglican Church of Kenya
                 </td>
             </tr>
         </table>
@@ -176,64 +204,50 @@ function getVerificationEmailTemplate($first_name, $verification_link) {
     </html>";
 }
 
-/**
- * VERIFICATION EMAIL TEMPLATE (Plain Text)
- */
 function getVerificationEmailPlainText($first_name, $verification_link) {
     return "Hello $first_name,
 
 Thank you for registering with the Church Management System.
 
-Please verify your email using the link below:
+Please verify your email using this link:
 $verification_link
 
 This link expires in 24 hours.
 
-If you didn't request this, please ignore this email.
-
 Thank you,
-Anglican Church of Kenya
-Church Management System";
+Anglican Church of Kenya";
 }
 
-/**
- * ============================================
- * PASSWORD RESET TEMPLATE (HTML)
- * ============================================
- */
 function getPasswordResetEmailTemplate($first_name, $reset_link) {
     return "
     <!DOCTYPE html>
     <html lang='en'>
     <head>
         <meta charset='UTF-8'>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <title>Password Reset</title>
     </head>
     <body style='font-family: Arial, sans-serif; background-color: #f4f4f4; margin:0; padding:0;'>
-        <table align='center' width='600' cellpadding='0' cellspacing='0' style='background:#fff; margin-top:30px; border-radius:8px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1);'>
+        <table align='center' width='600' cellpadding='0' cellspacing='0' style='background:#fff; margin-top:30px; border-radius:8px; overflow:hidden;'>
             <tr>
                 <td style='background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; text-align:center; padding:40px 0;'>
                     <h1 style='margin:0;'>Password Reset</h1>
-                    <p style='margin:5px 0 0 0;'>Church Management System</p>
                 </td>
             </tr>
             <tr>
                 <td style='padding:40px; color:#333;'>
                     <h2>Hello " . htmlspecialchars($first_name) . ",</h2>
-                    <p>We received a request to reset your password. Click the button below to reset it:</p>
+                    <p>Click the button below to reset your password:</p>
                     <p style='text-align:center; margin:30px 0;'>
                         <a href='" . htmlspecialchars($reset_link) . "' style='background:#667eea; color:#fff; text-decoration:none; padding:14px 30px; border-radius:6px; font-weight:bold; display:inline-block;'>Reset Password</a>
                     </p>
-                    <p>If that doesn't work, copy and paste the following link into your browser:</p>
+                    <p>Or copy this link:</p>
                     <p style='background:#f1f1f1; padding:10px; border-radius:4px; word-break:break-all; font-size:12px;'>" . htmlspecialchars($reset_link) . "</p>
-                    <p><strong>This link will expire in 1 hour.</strong></p>
-                    <p>If you didn't request this, just ignore this message. Your password will remain unchanged.</p>
+                    <p><strong>This link expires in 1 hour.</strong></p>
                 </td>
             </tr>
             <tr>
                 <td style='background:#f8f9fa; text-align:center; padding:20px; color:#777; font-size:13px;'>
-                    &copy; " . date('Y') . " Anglican Church of Kenya. All rights reserved.
+                    &copy; " . date('Y') . " Anglican Church of Kenya
                 </td>
             </tr>
         </table>
@@ -241,22 +255,14 @@ function getPasswordResetEmailTemplate($first_name, $reset_link) {
     </html>";
 }
 
-/**
- * PASSWORD RESET TEMPLATE (Plain Text)
- */
 function getPasswordResetEmailPlainText($first_name, $reset_link) {
     return "Hello $first_name,
 
-We received a request to reset your password.
-
-Click this link to reset your password:
+Reset your password using this link:
 $reset_link
 
 This link expires in 1 hour.
 
-If you didn't request this, ignore this email. Your password will remain unchanged.
-
 Thank you,
-Anglican Church of Kenya
-Church Management System";
+Anglican Church of Kenya";
 }
