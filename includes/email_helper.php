@@ -18,36 +18,50 @@ if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
     error_log("CRITICAL: Composer autoload not found!");
 }
 
-// Load environment variables from multiple possible locations
-try {
-    if (class_exists('Dotenv\Dotenv')) {
-        if (file_exists(__DIR__ . '/../.env.supabase')) {
-            $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..', '.env.supabase');
-            $dotenv->safeLoad();
-        } elseif (file_exists(__DIR__ . '/../.env')) {
-            $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
-            $dotenv->safeLoad();
-        }
+/**
+ * Get environment variable - tries multiple sources
+ */
+function getEnvVar($key, $default = '') {
+    // Try getenv() first
+    $value = getenv($key);
+    if ($value !== false && $value !== '') {
+        return $value;
     }
-} catch (Exception $e) {
-    error_log("Dotenv load error: " . $e->getMessage());
+    
+    // Try $_ENV
+    if (isset($_ENV[$key]) && $_ENV[$key] !== '') {
+        return $_ENV[$key];
+    }
+    
+    // Try $_SERVER
+    if (isset($_SERVER[$key]) && $_SERVER[$key] !== '') {
+        return $_SERVER[$key];
+    }
+    
+    return $default;
 }
 
 /**
  * Get email configuration from environment or fallback
  */
 function getEmailConfig() {
-    return [
-        'host' => getenv('SMTP_HOST') ?: ($_ENV['SMTP_HOST'] ?? 'smtp.gmail.com'),
-        'username' => getenv('SMTP_USERNAME') ?: ($_ENV['SMTP_USERNAME'] ?? 'beniquecreations@gmail.com'),
-        'password' => getenv('SMTP_PASSWORD') ?: ($_ENV['SMTP_PASSWORD'] ?? 'ikspurkhihjaabvs'),
-        'port' => getenv('SMTP_PORT') ?: ($_ENV['SMTP_PORT'] ?? 587),
-        'from_email' => getenv('SMTP_FROM_EMAIL') ?: ($_ENV['SMTP_FROM_EMAIL'] ?? 'noreply@anglicankenya.local'),
-        'from_name' => getenv('SMTP_FROM_NAME') ?: ($_ENV['SMTP_FROM_NAME'] ?? 'Church Management System'),
-        'app_url' => getenv('APP_URL') ?: ($_ENV['APP_URL'] ?? (isset($_SERVER['HTTP_HOST']) ? 
-            (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] : 
-            'http://localhost'))
+    $config = [
+        'host' => getEnvVar('SMTP_HOST', 'smtp.gmail.com'),
+        'username' => getEnvVar('SMTP_USERNAME', 'beniquecreations@gmail.com'),
+        'password' => getEnvVar('SMTP_PASSWORD', 'ikspurkhihjaabvs'),
+        'port' => getEnvVar('SMTP_PORT', '587'),
+        'from_email' => getEnvVar('SMTP_FROM_EMAIL', 'beniquecreations@gmail.com'),
+        'from_name' => getEnvVar('SMTP_FROM_NAME', 'Church Management System'),
+        'app_url' => getEnvVar('APP_URL', 
+            (isset($_SERVER['HTTP_HOST']) ? 
+                (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] : 
+                'http://localhost'))
     ];
+    
+    // Log config for debugging (remove password)
+    error_log("Email Config - Host: {$config['host']}, User: {$config['username']}, Port: {$config['port']}, URL: {$config['app_url']}");
+    
+    return $config;
 }
 
 /**
@@ -67,7 +81,7 @@ function sendVerificationEmail($email, $first_name, $verification_token) {
         $mail->Username   = $config['username'];
         $mail->Password   = $config['password'];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = $config['port'];
+        $mail->Port       = (int)$config['port'];
         
         // Timeout settings for slow connections
         $mail->Timeout = 30;
@@ -92,7 +106,7 @@ function sendVerificationEmail($email, $first_name, $verification_token) {
         $result = $mail->send();
         
         // Log success
-        error_log("Verification email sent successfully to: {$email}");
+        error_log("✅ Verification email sent successfully to: {$email}");
         
         return true;
 
@@ -100,10 +114,9 @@ function sendVerificationEmail($email, $first_name, $verification_token) {
         // Detailed error logging
         error_log("=== EMAIL SEND FAILURE ===");
         error_log("To: {$email}");
-        error_log("Error: {$mail->ErrorInfo}");
+        error_log("SMTP Error: {$mail->ErrorInfo}");
         error_log("Exception: " . $e->getMessage());
-        error_log("Config Host: {$config['host']}");
-        error_log("Config Username: {$config['username']}");
+        error_log("Config - Host: {$config['host']}, Port: {$config['port']}, User: {$config['username']}");
         error_log("=========================");
         
         return false;
@@ -127,7 +140,7 @@ function sendPasswordResetEmail($email, $first_name, $reset_token) {
         $mail->Username   = $config['username'];
         $mail->Password   = $config['password'];
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = $config['port'];
+        $mail->Port       = (int)$config['port'];
         
         $mail->Timeout = 30;
 
@@ -149,12 +162,12 @@ function sendPasswordResetEmail($email, $first_name, $reset_token) {
 
         $mail->send();
         
-        error_log("Password reset email sent successfully to: {$email}");
+        error_log("✅ Password reset email sent successfully to: {$email}");
         
         return true;
 
     } catch (Exception $e) {
-        error_log("Password reset email failed: {$mail->ErrorInfo}");
+        error_log("❌ Password reset email failed: {$mail->ErrorInfo}");
         error_log("Exception: " . $e->getMessage());
         return false;
     }
