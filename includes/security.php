@@ -69,10 +69,21 @@ function configure_secure_session() {
 }
 
 function start_secure_session() {
+    global $pdo;
+    
     if (session_status() === PHP_SESSION_NONE) {
-        configure_secure_session();
+        // Use database sessions for Render hosting
+        if (function_exists('init_database_sessions') && isset($pdo)) {
+            init_database_sessions($pdo);
+        } else {
+            // Fallback to file sessions with proper configuration
+            configure_secure_session();
+        }
+        
+        // Start the session
         session_start();
         
+        // Initialize session if needed
         if (!isset($_SESSION['_session_initialized'])) {
             session_regenerate_id(true);
             $_SESSION['_session_initialized'] = true;
@@ -81,15 +92,14 @@ function start_secure_session() {
             $_SESSION['_ip_address'] = $_SERVER['REMOTE_ADDR'];
         }
         
-        // ✅ CSRF Token Generation
-        if (!isset($_SESSION['csrf_token'])) {
+        // Generate CSRF token if not exists
+        if (empty($_SESSION['csrf_token'])) {
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
         }
     }
     
     validate_session_security();
 }
-
 function validate_session_security() {
     $session_timeout = 1800;
     
