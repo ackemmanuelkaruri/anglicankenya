@@ -8,7 +8,7 @@ ini_set('error_log', __DIR__ . '/error.log');
 /**
  * ============================================
  * SECURE MULTI-TENANT LOGIN SYSTEM
- * Final Production Version
+ * Final Production Version - CSRF FIX
  * ============================================
  */
 
@@ -28,7 +28,7 @@ header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
 
 start_secure_session();
 
-// Generate CSRF token if not exists
+// Generate CSRF token if not exists - FIXED: Always ensure it exists
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
@@ -54,10 +54,21 @@ if (!empty($redirect)) {
 
 // Process login
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // CSRF token validation
-    if (!isset($_POST['csrf_token']) || 
-        !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-        $error = 'Invalid request. Please refresh the page and try again.';
+    // CSRF token validation - FIXED: Better error handling
+    $submitted_token = $_POST['csrf_token'] ?? '';
+    $session_token = $_SESSION['csrf_token'] ?? '';
+    
+    // Debug log (remove in production)
+    error_log("CSRF Debug - Submitted: " . substr($submitted_token, 0, 10) . "... Session: " . substr($session_token, 0, 10) . "...");
+    
+    if (empty($submitted_token) || empty($session_token)) {
+        $error = 'Security token missing. Please refresh the page and try again.';
+        error_log("CSRF Error: Token missing");
+    } elseif (!hash_equals($session_token, $submitted_token)) {
+        $error = 'Security token invalid. Please refresh the page and try again.';
+        error_log("CSRF Error: Token mismatch");
+        // Regenerate token for next attempt
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
     } else {
         $username = sanitize_input($_POST['username'] ?? '');
         $password = $_POST['password'] ?? '';
@@ -71,25 +82,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif (strlen($password) < 8) {
             $error = 'Password must be at least 8 characters long.';
         } else {
-            // Check for lockout
+            // Check for lockout - FIXED: PostgreSQL syntax
             $stmt = $pdo->prepare("
                 SELECT COUNT(*) as failed_attempts 
                 FROM login_attempts 
                 WHERE (email_entered = ? OR user_id = (SELECT id FROM users WHERE username = ? OR email = ?))
-                AND was_successful = 0 
-                AND attempt_time > DATE_SUB(NOW(), INTERVAL 15 MINUTE)
+                AND was_successful = FALSE 
+                AND attempt_time > NOW() - INTERVAL '15 minutes'
             ");
             $stmt->execute([$username, $username, $username]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             
-            if ($result['failed_attempts'] >= 5) { // Reduced threshold for security
+            if ($result['failed_attempts'] >= 5) {
                 $error = 'Too many failed attempts. Account temporarily locked. Try again later.';
             } else {
                 try {
                     // Log attempt (initially as failed)
                     $stmt = $pdo->prepare("
                         INSERT INTO login_attempts (user_id, email_entered, ip_address, attempt_time, was_successful)
-                        VALUES ((SELECT id FROM users WHERE username = ? OR email = ?), ?, ?, NOW(), 0)
+                        VALUES ((SELECT id FROM users WHERE username = ? OR email = ?), ?, ?, NOW(), FALSE)
                     ");
                     $stmt->execute([$username, $username, $username, $ip_address]);
                     $attempt_id = $pdo->lastInsertId();
@@ -125,14 +136,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $error = 'Your account is pending email verification. Please check your email.';
                         } elseif ($user['account_status'] === 'inactive') {
                             $error = 'Your account is inactive. Please contact support.';
-                        } elseif ($user['email_verified'] == 0) {
+                        } elseif ($user['email_verified'] == FALSE) {
                             $error = 'Please verify your email address before logging in.';
                         } else {
                             // All checks passed - proceed with login
-                            // Update login attempt as successful
+                            // Update login attempt as successful - FIXED: PostgreSQL boolean
                             $stmt = $pdo->prepare("
                                 UPDATE login_attempts 
-                                SET was_successful = 1 
+                                SET was_successful = TRUE 
                                 WHERE attempt_id = ?
                             ");
                             $stmt->execute([$attempt_id]);
@@ -184,10 +195,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $stmt->execute([$user['id']]);
 
                             // Log successful login
-                            log_activity('LOGIN_SUCCESS', null, null, [
-                                'ip_address' => $ip_address,
-                                'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown'
-                            ]);
+                            if (function_exists('log_activity')) {
+                                log_activity('LOGIN_SUCCESS', null, null, [
+                                    'ip_address' => $ip_address,
+                                    'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown'
+                                ]);
+                            }
 
                             // Redirect
                             if (!empty($redirect)) {
@@ -199,7 +212,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                     } else {
                         $error = 'Invalid username or password.';
-                        log_activity('LOGIN_FAILED', null, null, ['username' => $username]);
+                        if (function_exists('log_activity')) {
+                            log_activity('LOGIN_FAILED', null, null, ['username' => $username]);
+                        }
                     }
                 } catch (PDOException $e) {
                     error_log("Login error: " . $e->getMessage());
@@ -209,6 +224,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+// Store current token for form
+$csrf_token_for_form = $_SESSION['csrf_token'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -239,6 +257,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if (!empty($error)): ?>
             <div class="alert alert-danger" role="alert">
                 <strong>Error:</strong> <?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?>
+                <?php if (strpos($error, 'token') !== false): ?>
+                    <br><small>Try refreshing the page (F5) and logging in again.</small>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
 
@@ -249,8 +270,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <form method="POST" action="" id="loginForm">
-            <!-- CSRF Token -->
-            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
+            <!-- CSRF Token - FIXED: Use stored variable -->
+            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token_for_form, ENT_QUOTES, 'UTF-8'); ?>">
             
             <div class="mb-3">
                 <label for="username" class="form-label">Username or Email</label>
@@ -322,6 +343,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 e.preventDefault();
                 alert('Password must be at least 8 characters long');
             }
+        });
+        
+        // Debug: Log token on form submit (remove in production)
+        document.getElementById('loginForm').addEventListener('submit', function() {
+            console.log('Form submitted with token');
         });
     </script>
 </body>
