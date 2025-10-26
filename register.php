@@ -454,51 +454,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             debug_log("Inserting user record...");
                             debug_log("Values - Province: {$province_id}, Org: {$org_id}, Diocese: {$diocese_id}, Arch: {$archdeaconry_id}, Dean: {$deanery_id}, Parish: {$parish_id}");
                             
-                            $stmt = $pdo->prepare("
-                                INSERT INTO users (
-                                    organization_id, 
-                                    province_id, 
-                                    diocese_id, 
-                                    archdeaconry_id, 
-                                    deanery_id, 
-                                    parish_id,
-                                    role_level, 
-                                    username, 
-                                    email, 
-                                    password, 
-                                    first_name, 
-                                    last_name, 
-                                    phone_number, 
-                                    gender, 
-                                    date_of_birth,
-                                    account_status, 
-                                    email_verification_token, 
-                                    email_verified, 
-                                    email_token_expires_at, 
-                                    created_at
-                                ) VALUES (?, ?, ?, ?, ?, ?, 'member', ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?, FALSE, ?, NOW())
-                            ");
+                           $stmt = $pdo->prepare("
+    INSERT INTO users (
+        organization_id, 
+        province_id, 
+        diocese_id, 
+        archdeaconry_id, 
+        deanery_id, 
+        parish_id,
+        role_level, 
+        username, 
+        email, 
+        password, 
+        first_name, 
+        last_name, 
+        phone_number, 
+        gender, 
+        date_of_birth,
+        account_status, 
+        email_verification_token, 
+        email_verified, 
+        email_token_expires_at, 
+        created_at
+    ) VALUES (?, ?, ?, ?, ?, ?, 'member', ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?, FALSE, ?::timestamp, NOW())
+");
 
-                            $token_expiry = (new DateTime())->modify('+24 hours')->format('Y-m-d H:i:s');
+$token_expiry = (new DateTime())->modify('+24 hours')->format('Y-m-d H:i:s');
 
-                            $stmt->execute([
-                                $org_id, 
-                                $province_id, 
-                                $diocese_id, 
-                                $archdeaconry_id, 
-                                $deanery_id, 
-                                $parish_id,
-                                $username, 
-                                $email, 
-                                $hashed_password, 
-                                $first_name, 
-                                $last_name, 
-                                $phone, 
-                                $gender, 
-                                $date_of_birth,
-                                $email_verification_token, 
-                                $token_expiry
-                            ]);
+$stmt->execute([
+    $org_id, 
+    $province_id, 
+    $diocese_id, 
+    $archdeaconry_id, 
+    $deanery_id, 
+    $parish_id,
+    $username, 
+    $email, 
+    $hashed_password, 
+    $first_name, 
+    $last_name, 
+    $phone, 
+    $gender, 
+    $date_of_birth,
+    $email_verification_token, 
+    $token_expiry
+]);
                             $new_user_id = $pdo->lastInsertId();
                             debug_log("User created with ID: {$new_user_id}");
                             
