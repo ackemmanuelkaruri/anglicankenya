@@ -28,10 +28,20 @@ header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
 
 start_secure_session();
 
-// Generate CSRF token if not exists - FIXED: Always ensure it exists
-if (empty($_SESSION['csrf_token'])) {
+// ✅ ALWAYS ensure session is started and token is fresh
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    start_secure_session();
+}
+
+// If no token or page has been refreshed after login failure, regenerate
+if (empty($_SESSION['csrf_token']) || isset($_GET['refresh_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
+
+// Store the token for use in the form
+$csrf_token_for_form = $_SESSION['csrf_token'];
+
+
 
 // Redirect if already logged in
 if (is_logged_in()) {
@@ -254,14 +264,22 @@ $csrf_token_for_form = $_SESSION['csrf_token'];
             <p>Church Management System</p>
         </div>
 
-        <?php if (!empty($error)): ?>
-            <div class="alert alert-danger" role="alert">
-                <strong>Error:</strong> <?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?>
-                <?php if (strpos($error, 'token') !== false): ?>
-                    <br><small>Try refreshing the page (F5) and logging in again.</small>
-                <?php endif; ?>
-            </div>
+       <?php if (!empty($error)): ?>
+    <div class="alert alert-danger" role="alert">
+        <strong>Error:</strong> <?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?>
+        
+        <?php if (strpos($error, 'token') !== false): ?>
+            <hr>
+            <small>
+                The security token expired or didn’t match.
+                <br>
+                👉 <a href="?refresh_token=1" class="text-decoration-underline">Click here to refresh the login form</a>
+                and try again.
+            </small>
         <?php endif; ?>
+    </div>
+<?php endif; ?>
+
 
         <?php if (!empty($success)): ?>
             <div class="alert alert-success" role="alert">
