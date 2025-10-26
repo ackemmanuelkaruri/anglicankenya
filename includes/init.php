@@ -1,56 +1,48 @@
 <?php
 /**
  * ============================================
- * SYSTEM INITIALIZER (init.php)
- * Central entry point for configuration, DB, and security
+ * INITIALIZATION FILE
+ * Updated to work with database sessions
  * ============================================
  */
 
-// -----------------------------------------------------
-// 1. Define app root for consistent includes
-// -----------------------------------------------------
-if (!defined('APP_ROOT')) {
-    define('APP_ROOT', dirname(__DIR__)); // One level above /includes/
+// Only define DB_INCLUDED if not already defined
+if (!defined('DB_INCLUDED')) {
+    define('DB_INCLUDED', true);
 }
 
-// -----------------------------------------------------
-// 2. Load configuration and environment setup
-//    (Since config.php is in the ROOT folder)
-// -----------------------------------------------------
-require_once APP_ROOT . '/config.php';
-
-// -----------------------------------------------------
-// 3. Define DB_INCLUDED before loading security.php
-//    (Prevents "Direct access not permitted" errors)
-// -----------------------------------------------------
-define('DB_INCLUDED', true);
-
-// -----------------------------------------------------
-// 4. Load Database and Security modules
-//    (db.php is also in the ROOT folder)
-// -----------------------------------------------------
-require_once APP_ROOT . '/db.php';
-require_once APP_ROOT . '/includes/security.php';
-
-// -----------------------------------------------------
-// 5. Start secure session if not started
-// -----------------------------------------------------
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+// Only load these if not already loaded
+if (!isset($pdo)) {
+    require_once __DIR__ . '/../config.php';
+    require_once __DIR__ . '/../db.php';
 }
 
-// -----------------------------------------------------
-// 6. Optional: Auto-check login session
-// -----------------------------------------------------
-if (!isset($_SESSION['user_id'])) {
-    // Redirect to login if not logged in
-    header("Location: " . (is_development() ? "/anglicankenya/login.php" : "/login.php"));
-    exit();
+// Only load session handler if not already loaded
+if (!function_exists('init_database_sessions')) {
+    require_once __DIR__ . '/../db_session.php';
 }
 
-// -----------------------------------------------------
-// 7. Environment-specific logging (optional)
-// -----------------------------------------------------
-if (is_development()) {
-    error_log("✅ init.php loaded successfully for environment: " . current_environment());
+// Only load security functions if not already loaded
+if (!function_exists('start_secure_session')) {
+    require_once __DIR__ . '/security.php';
+}
+
+// DO NOT call start_secure_session() here - it should be called in the main file
+
+// Load other required files
+if (file_exists(__DIR__ . '/functions.php')) {
+    require_once __DIR__ . '/functions.php';
+}
+
+if (file_exists(__DIR__ . '/helpers.php')) {
+    require_once __DIR__ . '/helpers.php';
+}
+
+// Set timezone
+date_default_timezone_set('Africa/Nairobi');
+
+// Error handling for production
+if (!is_development()) {
+    error_reporting(0);
+    ini_set('display_errors', 0);
 }
